@@ -1,0 +1,47 @@
+Beach town road
+poly count = 11523
+materials= 4
+texture = 2
+
+Desert Town Road
+poly count = 11903
+materials= 3
+texture = 2
+
+
+Desert Road 2
+poly count = 20972
+materials= 3
+texture = 2
+
+Desert Road 
+poly count = 17393
+materials= 2
+texture = 2
+
+Desert Road with T road
+poly count = 12078
+materials= 4
+texture = 2
+
+Bridge
+poly count = 9542
+materials= 2
+texture = 2
+
+
+
+Green Mountains
+poly count = 19298
+materials= 1
+texture = 1
+
+Green with singbord
+poly count = 17726
+materials= 1
+texture = 1
+
+Green with big rocks
+poly count = 20613
+materials= 2
+texture = 2
