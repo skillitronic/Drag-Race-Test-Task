@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-[CreateAssetMenu(fileName = "Level", menuName = "CreateLevel")]
+[CreateAssetMenu(fileName = "Level", menuName = "CreateLevel"),System.Serializable]
 public class Level : ScriptableObject
 {
     public GameObject levelReference;

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-
+﻿
 [System.Serializable]
 public class SaveData
 {
@@ -20,8 +18,4 @@ public class SaveData
     }
 
     public int levelIndex;
-    public string path;
-    public Collection<Level> levels;
-
-
 }

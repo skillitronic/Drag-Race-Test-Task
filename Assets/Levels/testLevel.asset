@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539495fd9ac56344c95ad16b4acf19f5, type: 3}
   m_Name: testLevel
   m_EditorClassIdentifier: 
-  levelReference: {fileID: 0}
+  levelReference: {fileID: 2879598594277789019, guid: 50a7bb906272f804fb7500664e449dab,
+    type: 3}
   isWon: 0
   isChosen: 0

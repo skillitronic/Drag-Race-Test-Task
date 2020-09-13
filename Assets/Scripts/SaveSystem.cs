@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -23,7 +22,7 @@ public class SaveSystem
         file.Close();
     }
 
-    public static object Load(string loadFile)
+/*    public static object Load(string loadFile)
     {
         string path = GetPath(loadFile);
 
@@ -49,7 +48,36 @@ public class SaveSystem
             return null;
         }
 
+    }*/
+    public static void Load(string loadFile, ref int loadData)
+    {
+        string path = GetPath(loadFile);
+
+        if (!File.Exists(path))
+        {
+            return;
+        }
+
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        FileStream file = File.Open(path, FileMode.Open);
+
+        try
+        {
+            object save = formatter.Deserialize(file);
+            loadData = (int)save;
+            file.Close();
+            return;
+        }
+        catch
+        {
+            Debug.LogErrorFormat($"Failed to load file at {path}");
+            file.Close();
+            return;
+        }
+
     }
+
 
     public static string GetPath(string saveName)
     {
@@ -57,5 +85,3 @@ public class SaveSystem
     }
 
 }
-
-

@@ -2,20 +2,6 @@
 
 public class SceneController
 {
-    private static SceneController _current;
-    public static SceneController Current
-    {
-        get
-        {
-            if (_current == null)
-            {
-                _current = new SceneController();
-            }
-
-            return _current;
-        }
-
-    }
 
     public static void LoadSceneByName(string name)
     {
