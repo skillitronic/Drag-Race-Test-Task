@@ -10,6 +10,7 @@ public class GameStartTimer : MonoBehaviour
 
     private IEnumerator StartTimer()
     {
+        Debug.Log("Started");
         float timer = 3;
         while (timer > 0)
         {

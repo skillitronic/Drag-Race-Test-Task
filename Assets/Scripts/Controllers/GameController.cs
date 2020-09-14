@@ -13,7 +13,10 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
 
+    private void Start()
+    {
         if (levelList[SaveData.Current.levelIndex].isWon == false)
         {
             Instantiate(levelList[SaveData.Current.levelIndex].levelReference, instantiater);

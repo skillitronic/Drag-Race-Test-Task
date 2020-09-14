@@ -11,16 +11,15 @@ public class Events : MonoBehaviour
     public UnityEvent WinEvent;
     public UnityEvent LoseEvent;
 
-    private GameStartTimer gameStartTimer;
+    public GameStartTimer gameStartTimer;
 
     private void Awake()
     {
         Instance = this;
-        gameStartTimer = GetComponent<GameStartTimer>();
+        StartTimerEvent.AddListener(gameStartTimer.StartTimerMethod);
     }
 
     private void Start()
     {
-        StartTimerEvent.AddListener(gameStartTimer.StartTimerMethod);
     }
 }
