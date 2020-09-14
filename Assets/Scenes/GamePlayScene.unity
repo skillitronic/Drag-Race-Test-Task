@@ -132,9 +132,37 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 350706068, guid: 42aa88650b9c82c4287c3a8f4b735709, type: 3}
+      propertyPath: m_Color.r
+      value: 0.99215686
+      objectReference: {fileID: 0}
+    - target: {fileID: 350706068, guid: 42aa88650b9c82c4287c3a8f4b735709, type: 3}
+      propertyPath: m_Color.g
+      value: 0.39607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 350706068, guid: 42aa88650b9c82c4287c3a8f4b735709, type: 3}
+      propertyPath: m_Color.b
+      value: 0.39607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 350706068, guid: 42aa88650b9c82c4287c3a8f4b735709, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 350706068, guid: 42aa88650b9c82c4287c3a8f4b735709, type: 3}
+      propertyPath: m_Maskable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 392318569, guid: 42aa88650b9c82c4287c3a8f4b735709, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 392318569, guid: 42aa88650b9c82c4287c3a8f4b735709, type: 3}
+      propertyPath: m_Maskable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 560175374, guid: 42aa88650b9c82c4287c3a8f4b735709, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1322200413, guid: 42aa88650b9c82c4287c3a8f4b735709, type: 3}
       propertyPath: m_Sprite
