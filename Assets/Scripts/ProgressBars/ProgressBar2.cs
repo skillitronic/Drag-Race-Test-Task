@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ProgressBar2 : MonoBehaviour
@@ -9,19 +10,25 @@ public class ProgressBar2 : MonoBehaviour
     [SerializeField] private float maxTimer;
     private float timer;
 
+    private void Awake()
+    {
+        slider = GetComponent<Slider>();
+    }
+
     private void OnEnable()
     {
         Events.Instance.LoseEvent.AddListener(() => timer = 0);
+        Events.Instance.restartTimer += (() => slider.DOValue(0, .1f));
     }
 
     private void OnDisable()
     {
         Events.Instance.LoseEvent.RemoveListener(() => timer = 0);
+        Events.Instance.restartTimer -= (() => slider.DOValue(0, .1f));
     }
 
     void Start()
     {
-        slider = GetComponent<Slider>();
         slider.maxValue = maxValue;
     }
 
@@ -30,6 +37,7 @@ public class ProgressBar2 : MonoBehaviour
         if (slider.value == 0)
         {
             timer = 0;
+            slider.fillRect.GetComponent<Image>().color = Color.green;
         }
 
         if (slider.value < slider.maxValue)
@@ -38,6 +46,7 @@ public class ProgressBar2 : MonoBehaviour
         }
         else if (slider.value == slider.maxValue)
         {
+            slider.fillRect.GetComponent<Image>().color = Color.red;
             if (timer < maxTimer)
             {
                 timer += Time.deltaTime;

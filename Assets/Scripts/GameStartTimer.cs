@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameStartTimer : MonoBehaviour
 {
-    private void OnEnable()
+    private void Start()
     {
         Events.Instance.StartTimerEvent.AddListener(StartTimerMethod);
     }

@@ -40,9 +40,9 @@ public class ProgressBar1 : MonoBehaviour
         zonesFolder.localPosition = new Vector2(0, zonePosition);
 
         CalculateTouchZone();
-        
 
-        
+
+
         StartLoop();
     }
 
@@ -66,12 +66,14 @@ public class ProgressBar1 : MonoBehaviour
                 StopLoop();
                 MoveZone();
                 CalculateTouchZone();
+                Events.Instance.restartTimer?.Invoke();
             }
             else if (gameObject.GetComponent<Slider>().value >= blueRangeNeg && gameObject.GetComponent<Slider>().value <= blueRangePos)
             {
                 StopLoop();
                 MoveZone();
                 CalculateTouchZone();
+                Events.Instance.restartTimer?.Invoke();
             }
             else
             {
@@ -89,7 +91,7 @@ public class ProgressBar1 : MonoBehaviour
     }
 
     private void StopLoop()
-    { 
+    {
         tween.Kill();
         tween = gameObject.GetComponent<Slider>().DOValue(0, .3f).OnComplete(StartLoop);
     }
@@ -101,7 +103,7 @@ public class ProgressBar1 : MonoBehaviour
         CalculateTouchZone();
     }
 
-    private void CalculateTouchZone() 
+    private void CalculateTouchZone()
     {
         centerZonePosition = zonePosition + halfSliderHeight;
 

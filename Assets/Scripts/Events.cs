@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.Analytics;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class Events : MonoBehaviour
@@ -10,6 +10,8 @@ public class Events : MonoBehaviour
     public UnityEvent StartGameEvent;
     public UnityEvent WinEvent;
     public UnityEvent LoseEvent;
+
+    public Action restartTimer;
 
 
     private void Awake()
