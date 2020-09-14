@@ -17,4 +17,9 @@ public class SceneController
     {
         SceneManager.UnloadSceneAsync(name);
     }
+
+    public static void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+    }
 }

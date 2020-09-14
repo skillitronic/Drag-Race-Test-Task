@@ -2896,6 +2896,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1973081580}
   - component: {fileID: 1973081581}
+  - component: {fileID: 9219703421335459679}
   m_Layer: 5
   m_Name: Bar2_Slider
   m_TagString: Untagged
@@ -2962,18 +2963,32 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1932448206}
   m_HandleRect: {fileID: 0}
   m_Direction: 2
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &9219703421335459679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973081579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6253ddd9a463524aa2d9dfe7b3063b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxValue: 10
+  maxTimer: 0
 --- !u!1 &1985094820
 GameObject:
   m_ObjectHideFlags: 0
@@ -3178,6 +3193,8 @@ GameObject:
   - component: {fileID: 3061674056967037892}
   - component: {fileID: 3061674056967037890}
   - component: {fileID: 1953222389}
+  - component: {fileID: 625818178}
+  - component: {fileID: 625818177}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -3219,88 +3236,8 @@ MonoBehaviour:
   levelList:
   - {fileID: 11400000, guid: 07e7baee83a45194abba98dc4bc96a52, type: 2}
   - {fileID: 11400000, guid: f0efa2e925967414399c74d66bcc70eb, type: 2}
-  UIData:
-    timerText: {fileID: 107350475}
-    winnerText: {fileID: 1771658401}
-    bar1: {fileID: 1437982958}
-    bar2: {fileID: 1973081581}
   score: 0
   instantiater: {fileID: 0}
-  StartTimerEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1288710978}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  StartGameEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1288710978}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 560175374}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  WinGameEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 560175374}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 130091685}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &1953222389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3313,3 +3250,120 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c76cb021b32cfc14b81cca861bbcee06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &625818178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3061674056967037895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caeae70f3a90b93498c1cbe07719654a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeInTimer: 0
+  fadeOutTimer: 0
+  timerText: {fileID: 0}
+  winnerText: {fileID: 0}
+--- !u!114 &625818177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3061674056967037895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d1cee7a31bb2644b4925c7eb89847a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartTimerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 625818178}
+        m_MethodName: FadeInCanvas
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1288710978}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  StartGameEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 625818178}
+        m_MethodName: FadeOutCanvas
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1288710978}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 625818178}
+        m_MethodName: FadeInCanvas
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 560175374}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  WinEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 625818178}
+        m_MethodName: FadeOutCanvas
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 560175374}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 625818178}
+        m_MethodName: FadeInCanvas
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 130091685}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  LoseEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 625818178}
+        m_MethodName: FadeOutCanvas
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 560175374}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 625818178}
+        m_MethodName: FadeInCanvas
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 178650978}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

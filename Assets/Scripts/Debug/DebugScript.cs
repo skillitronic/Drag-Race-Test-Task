@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 class DebugScript : MonoBehaviour
 {
@@ -56,7 +57,7 @@ class DebugScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             //check states of current level
-            GameController.Instance.Restart();
+            SceneController.RestartScene();
         }
 
     }
