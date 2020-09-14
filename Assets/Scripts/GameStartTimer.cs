@@ -3,6 +3,16 @@ using UnityEngine;
 
 public class GameStartTimer : MonoBehaviour
 {
+    private void OnEnable()
+    {
+        Events.Instance.StartTimerEvent.AddListener(StartTimerMethod);
+    }
+
+    private void OnDisable()
+    {
+        Events.Instance.StartTimerEvent.RemoveListener(StartTimerMethod);
+    }
+
     public void StartTimerMethod()
     {
         StartCoroutine(nameof(StartTimer));
@@ -10,7 +20,6 @@ public class GameStartTimer : MonoBehaviour
 
     private IEnumerator StartTimer()
     {
-        Debug.Log("Started");
         float timer = 3;
         while (timer > 0)
         {
