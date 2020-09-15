@@ -37,4 +37,9 @@ public class UIController : MonoBehaviour
         gameObject.GetComponent<CanvasGroup>().DOFade(0, fadeOutTimer).OnComplete(() => gameObject.SetActive(false));
     }
 
+    public void WinShit()
+    {
+        //winnerText.
+    }
+
 }

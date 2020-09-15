@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
     public List<Level> levelList;
     public int score;
 
+    public int clickCounter;
+
     public Transform instantiater;
 
     private void Awake()

@@ -24,6 +24,7 @@ public class ProgressBar1 : MonoBehaviour
     public float halfGreenZone;
     public float halfBlueZone;
 
+    private int localClickCounter = 0;
 
     private void Awake()
     {
@@ -49,6 +50,7 @@ public class ProgressBar1 : MonoBehaviour
     private void OnEnable()
     {
         Events.Instance.LoseEvent.AddListener(StopLoop);
+        localClickCounter = 0;
     }
 
     private void OnDisable()
@@ -63,22 +65,33 @@ public class ProgressBar1 : MonoBehaviour
         {
             if (gameObject.GetComponent<Slider>().value >= greenRangeNeg && gameObject.GetComponent<Slider>().value <= greenRangePos)
             {
+                localClickCounter++;
+                GameController.Instance.IncreaseScore(500);
                 StopLoop();
                 MoveZone();
                 CalculateTouchZone();
                 Events.Instance.restartTimer?.Invoke();
+                //Effect
             }
             else if (gameObject.GetComponent<Slider>().value >= blueRangeNeg && gameObject.GetComponent<Slider>().value <= blueRangePos)
             {
+                localClickCounter++;
+                GameController.Instance.IncreaseScore(1500);
                 StopLoop();
                 MoveZone();
                 CalculateTouchZone();
                 Events.Instance.restartTimer?.Invoke();
+                //Super effect
             }
             else
             {
                 Events.Instance.LoseEvent.Invoke();
             }
+        }
+
+        if (localClickCounter == GameController.Instance.clickCounter)
+        {
+            Events.Instance.WinEvent.Invoke();
         }
 
 

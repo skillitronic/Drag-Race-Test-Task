@@ -7,6 +7,7 @@ public class ProgressBar2 : MonoBehaviour
     public float maxValue;
     private Slider slider;
 
+
     [SerializeField] private float maxTimer;
     private float timer;
 
@@ -19,6 +20,7 @@ public class ProgressBar2 : MonoBehaviour
     {
         Events.Instance.LoseEvent.AddListener(() => timer = 0);
         Events.Instance.restartTimer += (() => slider.DOValue(0, .1f));
+
     }
 
     private void OnDisable()
