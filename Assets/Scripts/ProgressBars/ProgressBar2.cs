@@ -13,7 +13,7 @@ public class ProgressBar2 : MonoBehaviour
 
     private float timer;
 
-    private void Start()
+    private void Awake()
     {
         Events.Instance.ZoneClickEvent += () => sliders.value = 0;
     }
@@ -25,7 +25,6 @@ public class ProgressBar2 : MonoBehaviour
 
     private void Update()
     {
-
 
         if (sliders.value == 0)
         {

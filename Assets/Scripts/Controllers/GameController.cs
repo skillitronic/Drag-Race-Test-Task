@@ -5,11 +5,11 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; }
 
-    public List<Level> levelList;
-    public Camera gameCamera;
+    [SerializeField] private List<Level> levelList;
+
+    [SerializeField] private Camera gameCamera;
+
     public Transform instantiater;
-
-
 
     public int score;
 
@@ -19,6 +19,18 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void OnEnable()
+    {
+        Events.Instance.GreenZoneClickEvent += () => IncreaseScore(500);
+        Events.Instance.BlueZoneClickEvent += () => IncreaseScore(1500);
+    }
+
+    private void OnDisable()
+    {
+        Events.Instance.GreenZoneClickEvent -= () => IncreaseScore(500);
+        Events.Instance.BlueZoneClickEvent -= () => IncreaseScore(1500);
     }
 
     private void Start()

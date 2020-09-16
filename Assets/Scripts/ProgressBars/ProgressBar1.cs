@@ -40,7 +40,7 @@ public class ProgressBar1 : MonoBehaviour
         StartLoop();
     }
 
-    private void OnEnable()
+    private void Start()
     {
         Events.Instance.ZoneClickEvent += () => localClickCounter--;
         Events.Instance.ZoneClickEvent += RestartLoop;

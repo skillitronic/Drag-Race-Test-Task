@@ -22,16 +22,5 @@ public class Events : MonoBehaviour
         Instance = this;
     }
 
-    private void OnEnable()
-    {
-        GreenZoneClickEvent += () => GameController.Instance.IncreaseScore(500);
-        BlueZoneClickEvent += () => GameController.Instance.IncreaseScore(1500);
-    }
-
-    private void OnDisable()
-    {
-        GreenZoneClickEvent -= () => GameController.Instance.IncreaseScore(500);
-        BlueZoneClickEvent -= () => GameController.Instance.IncreaseScore(1500);
-    }
 
 }
