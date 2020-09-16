@@ -8,13 +8,15 @@ public class UIController : MonoBehaviour
 {
     public static UIController Instance { get; private set; }
 
-    [SerializeField] private float fadeInTimer;
-    [SerializeField] private float fadeOutTimer;
+    [SerializeField] private float fadeInTimer = 0;
+    [SerializeField] private float fadeOutTimer = 0;
 
     public TextMeshProUGUI timerText;
-    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI scoreText = null;
 
-    [SerializeField] private TMP_Typewriter winnerTextAnimation;
+    [SerializeField] private TMP_Typewriter winnerTextAnimation = null;
+
+    private Tween tween;
 
     private void Awake()
     {

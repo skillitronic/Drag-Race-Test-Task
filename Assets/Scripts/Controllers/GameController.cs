@@ -5,9 +5,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; }
 
-    [SerializeField] private List<Level> levelList;
-
-    [SerializeField] private Camera gameCamera;
+    [SerializeField] private List<Level> levelList = null;
 
     public Transform instantiater;
 

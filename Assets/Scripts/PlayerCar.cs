@@ -4,9 +4,10 @@ public class PlayerCar : MonoBehaviour
 {
     public GameObject flameParticles;
     //List of Upgrades
+
     private void Awake()
     {
-        CameraScript.Instance.playerCar = this.transform;
+        CameraScript.Instance.playerCar = transform;
 
     }
     public void OnEnable()

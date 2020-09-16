@@ -3,13 +3,13 @@ using UnityEngine.UI;
 using DG.Tweening;
 public class ProgressBar1 : MonoBehaviour
 {
-    [SerializeField] private float timeToReach;
+    [SerializeField] private float timeToReach = 0;
 
-    [SerializeField] private RectTransform zonesFolder;
-    [SerializeField] private RectTransform greenZone;
-    [SerializeField] private RectTransform blueZone;
+    [SerializeField] private RectTransform zonesFolder = null;
+    [SerializeField] private RectTransform greenZone = null;
+    [SerializeField] private RectTransform blueZone = null;
 
-    [SerializeField] private Slider slider;
+    [SerializeField] private Slider slider = null;
 
     private Tween tween;
 
@@ -46,7 +46,6 @@ public class ProgressBar1 : MonoBehaviour
         Events.Instance.ZoneClickEvent += RestartLoop;
         Events.Instance.ZoneClickEvent += MoveZone;
         Events.Instance.ZoneClickEvent += CalculateTouchZone;
-        Events.Instance.ZoneClickEvent += CameraScript.Instance.ChangeCameraFOVAnimation;
 
         Events.Instance.GreenZoneClickEvent += Events.Instance.ZoneClickEvent.Invoke;
         Events.Instance.BlueZoneClickEvent += Events.Instance.ZoneClickEvent.Invoke;
@@ -58,7 +57,6 @@ public class ProgressBar1 : MonoBehaviour
         Events.Instance.ZoneClickEvent -= RestartLoop;
         Events.Instance.ZoneClickEvent -= MoveZone;
         Events.Instance.ZoneClickEvent -= CalculateTouchZone;
-        Events.Instance.ZoneClickEvent -= CameraScript.Instance.ChangeCameraFOVAnimation;
 
         Events.Instance.GreenZoneClickEvent -= Events.Instance.ZoneClickEvent.Invoke;
         Events.Instance.BlueZoneClickEvent -= Events.Instance.ZoneClickEvent.Invoke;

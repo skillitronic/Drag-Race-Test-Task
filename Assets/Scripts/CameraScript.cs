@@ -5,55 +5,66 @@ public class CameraScript : MonoBehaviour
 {
     public static CameraScript Instance { get; private set; }
 
-    [SerializeField] private Camera gameCamera;
-    [SerializeField] private GameObject speedParticles;
-    [HideInInspector] public Transform playerCar;
+    [SerializeField] private Camera gameCamera = null;
+    [SerializeField] private GameObject speedParticles = null;
+    [HideInInspector] public Transform playerCar = null;
 
     [Space(10f)]
     [Header("CameraFovSettings")]
 
     [SerializeField] private float cameraFOV = 60;
-    [SerializeField] private float cameraFOVIncreaser;
-    [SerializeField] private float FOVTimeAnimation;
-    [SerializeField] private float FOVTimeDelay;
-    [SerializeField] private Ease easeType;
+    [SerializeField] private float cameraFOVIncreaser = 0;
+    [SerializeField] private float FOVTimeAnimation = 0;
+    [SerializeField] private float FOVTimeDelay = 0 ;
+    [SerializeField] private Ease easeType = Ease.InOutQuad;
 
     [Space(10f)]
     [Header("CameraMoveSettings")]
 
-    [SerializeField] private Vector3 cameraOffset;
-    [SerializeField] private float moveTimeAnimation;
+    [SerializeField] private Vector3 cameraOffset =  new Vector3(0,0,0);
+    [SerializeField] private float moveTimeAnimation = 0;
+
+    private Tween tween;
 
     private void Awake()
     {
         Instance = this;
         gameCamera.fieldOfView = cameraFOV;
+
+        tween = gameCamera.DOFieldOfView(cameraFOV + cameraFOVIncreaser, FOVTimeAnimation).SetEase(easeType).OnComplete(() => gameCamera.DOFieldOfView(cameraFOV, FOVTimeAnimation).SetEase(easeType).SetDelay(FOVTimeDelay));
     }
 
     private void Start()
     {
         Events.Instance.StartGameEvent.AddListener(MoveCameraToCar);
+        Events.Instance.ZoneClickEvent += ChangeCameraFOVAnimation;
         Events.Instance.ZoneClickEvent += () => speedParticles.SetActive(true);
     }
 
     private void OnDisable()
     {
         Events.Instance.StartGameEvent.RemoveListener(MoveCameraToCar);
+
         Events.Instance.ZoneClickEvent -= () => speedParticles.SetActive(true);
+        Events.Instance.ZoneClickEvent += ChangeCameraFOVAnimation;
     }
 
     public void ChangeCameraFOVAnimation()
-    {
-        gameCamera.DOFieldOfView(cameraFOV + cameraFOVIncreaser, FOVTimeAnimation).SetEase(easeType).OnComplete(() => gameCamera.DOFieldOfView(cameraFOV, FOVTimeAnimation).SetEase(easeType).SetDelay(FOVTimeDelay));
+    {   
+        if (tween.IsPlaying())
+        {
+            return;
+        }
+        tween.Play();
     }
 
     private void MoveCameraToCar()
     {
         gameObject.transform.DOMove(
-                new Vector3(
-                    playerCar.position.x,
-                    playerCar.position.y + cameraOffset.y,
-                    playerCar.position.z + cameraOffset.z),
+            new Vector3(
+                playerCar.position.x,
+                playerCar.position.y + cameraOffset.y,
+                playerCar.position.z + cameraOffset.z),
             moveTimeAnimation);
     }
 }
