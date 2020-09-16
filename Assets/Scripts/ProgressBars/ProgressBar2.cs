@@ -1,54 +1,45 @@
-﻿using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ProgressBar2 : MonoBehaviour
 {
-    public float maxValue;
-    private Slider slider;
+    [SerializeField] private Slider sliders;
 
+    [SerializeField] private Image fillImage;
+    [SerializeField] private Color32 greenColor;
+    [SerializeField] private Color32 redColor;
 
     [SerializeField] private float maxTimer;
+
     private float timer;
 
-    private void Awake()
+    private void Start()
     {
-        slider = GetComponent<Slider>();
-    }
-
-    private void OnEnable()
-    {
-        Events.Instance.LoseEvent.AddListener(() => timer = 0);
-        Events.Instance.restartTimer += (() => slider.DOValue(0, .1f));
-
+        Events.Instance.ZoneClickEvent += () => sliders.value = 0;
     }
 
     private void OnDisable()
     {
-        Events.Instance.LoseEvent.RemoveListener(() => timer = 0);
-        Events.Instance.restartTimer -= (() => slider.DOValue(0, .1f));
+        Events.Instance.ZoneClickEvent -= () => sliders.value = 0;
     }
 
-    void Start()
+    private void Update()
     {
-        slider.maxValue = maxValue;
-    }
 
-    void Update()
-    {
-        if (slider.value == 0)
+
+        if (sliders.value == 0)
         {
             timer = 0;
-            slider.fillRect.GetComponent<Image>().color = Color.green;
+            fillImage.color = greenColor;
         }
 
-        if (slider.value < slider.maxValue)
+        if (sliders.value < sliders.maxValue)
         {
-            slider.value += Time.deltaTime;
+            sliders.value += Time.deltaTime / 10; // 10 seconds before starts lose timer
         }
-        else if (slider.value == slider.maxValue)
+        else if (sliders.value == sliders.maxValue)
         {
-            slider.fillRect.GetComponent<Image>().color = Color.red;
+            fillImage.color = redColor;
             if (timer < maxTimer)
             {
                 timer += Time.deltaTime;

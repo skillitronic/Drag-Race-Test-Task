@@ -2,8 +2,8 @@
 
 public class SpawnCars : MonoBehaviour
 {
-    public GameObject carReference;
-    public void OnEnable()
+    [SerializeField] private GameObject carReference;
+    public void Awake()
     {
         GameObject car = Instantiate(carReference, GameController.Instance.instantiater.transform);
         car.transform.position = transform.position;

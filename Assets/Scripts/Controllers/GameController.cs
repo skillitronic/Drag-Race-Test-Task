@@ -1,16 +1,20 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; }
 
     public List<Level> levelList;
+    public Camera gameCamera;
+    public Transform instantiater;
+
+
+
     public int score;
 
-    public int clickCounter;
+    public int clicksToWin;
 
-    public Transform instantiater;
 
     private void Awake()
     {
@@ -30,5 +34,6 @@ public class GameController : MonoBehaviour
     {
         score += amount;
     }
+
 
 }

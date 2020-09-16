@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_typewriter: {fileID: 1255583354}
-  m_speed: 2
+  m_speed: 5
 --- !u!4 &64542462
 Transform:
   m_ObjectHideFlags: 0

@@ -1,7 +1,8 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using DG.Tweening;
+using KoganeUnityLib;
+using System.Collections;
 
 public class UIController : MonoBehaviour
 {
@@ -11,16 +12,23 @@ public class UIController : MonoBehaviour
     [SerializeField] private float fadeOutTimer;
 
     public TextMeshProUGUI timerText;
-    public TextMeshProUGUI winnerText;
+    [SerializeField] private TextMeshProUGUI scoreText;
+
+    [SerializeField] private TMP_Typewriter winnerTextAnimation;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public void TurnCanvas(Canvas canvas, bool state)
+    private void OnEnable()
     {
-        canvas.gameObject.SetActive(state);
+        Events.Instance.WinEvent.AddListener(WinShit);
+    }
+
+    private void OnDisable()
+    {
+        Events.Instance.WinEvent.RemoveListener(WinShit);
     }
 
     public void FadeInCanvas(GameObject gameObject)
@@ -39,7 +47,37 @@ public class UIController : MonoBehaviour
 
     public void WinShit()
     {
-        //winnerText.
+        winnerTextAnimation.gameObject.SetActive(true);
+        scoreText.gameObject.SetActive(false);
+
+//You need to add 1 more character to not broke the animation
+        winnerTextAnimation.Play
+            (
+            text: "WINNERr",
+            speed: 5f,
+            onComplete: () =>
+                {
+                    winnerTextAnimation.gameObject.SetActive(false);
+                    scoreText.gameObject.SetActive(true);
+                    StartCoroutine(nameof(ScoreAnimation));
+                }
+            );
     }
 
+    private IEnumerator ScoreAnimation()
+    {
+        float number = 0;
+        while (true)
+        {
+            if (number < GameController.Instance.score)
+            {
+
+                number += 25;
+                scoreText.SetText(number.ToString());
+                yield return new WaitForSeconds(.05f);
+            }
+            yield return new WaitForSeconds(1f);
+            scoreText.DOFade(0, 1f).OnComplete(() => scoreText.gameObject.SetActive(false));
+        }
+    }
 }

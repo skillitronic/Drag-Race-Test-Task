@@ -1,61 +1,67 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-
 public class ProgressBar1 : MonoBehaviour
 {
-    public RectTransform zonesFolder;
-    public RectTransform greenZone;
-    public RectTransform blueZone;
-    public float timeToReach;
+    [SerializeField] private float timeToReach;
+
+    [SerializeField] private RectTransform zonesFolder;
+    [SerializeField] private RectTransform greenZone;
+    [SerializeField] private RectTransform blueZone;
+
+    [SerializeField] private Slider slider;
+
     private Tween tween;
 
-    public float sliderHeight;
-    public float halfSliderHeight;
-    public float halfZoneHeight;
-    public float zonePosition;
-    public float centerZonePosition;
-    public float greenRangePos;
-    public float greenRangeNeg;
-    public float blueRangePos;
-    public float blueRangeNeg;
-    public float possibleRandomRange;
+    private float sliderHeight;
+    private float zonePosition;
+    private float centerZonePosition;
+    private float possibleRandomRange;
+    private float greenRangeTop;
+    private float greenRangeBot;
+    private float blueRangeTop;
+    private float blueRangeBot;
 
-    public float halfGreenZone;
-    public float halfBlueZone;
+    private int localClickCounter;
 
-    private int localClickCounter = 0;
 
     private void Awake()
     {
-        halfGreenZone = greenZone.rect.height / 2;
-        halfBlueZone = blueZone.rect.height / 2;
+        localClickCounter = GameController.Instance.clicksToWin;
 
+        sliderHeight = GetComponent<RectTransform>().rect.height;
 
-        sliderHeight = gameObject.GetComponent<RectTransform>().rect.height;
-        halfSliderHeight = gameObject.GetComponent<RectTransform>().rect.height / 2;
-        halfZoneHeight = zonesFolder.rect.height / 2;
-
-        possibleRandomRange = halfSliderHeight - halfZoneHeight;
+        possibleRandomRange = sliderHeight / 2 - zonesFolder.rect.height / 2;
         zonePosition = Random.Range(-possibleRandomRange, possibleRandomRange);
         zonesFolder.localPosition = new Vector2(0, zonePosition);
 
         CalculateTouchZone();
-
-
 
         StartLoop();
     }
 
     private void OnEnable()
     {
-        Events.Instance.LoseEvent.AddListener(StopLoop);
-        localClickCounter = 0;
+        Events.Instance.ZoneClickEvent += () => localClickCounter--;
+        Events.Instance.ZoneClickEvent += RestartLoop;
+        Events.Instance.ZoneClickEvent += MoveZone;
+        Events.Instance.ZoneClickEvent += CalculateTouchZone;
+        Events.Instance.ZoneClickEvent += CameraScript.Instance.ChangeCameraFOVAnimation;
+
+        Events.Instance.GreenZoneClickEvent += Events.Instance.ZoneClickEvent.Invoke;
+        Events.Instance.BlueZoneClickEvent += Events.Instance.ZoneClickEvent.Invoke;
     }
 
     private void OnDisable()
     {
-        Events.Instance.LoseEvent.AddListener(StopLoop);
+        Events.Instance.ZoneClickEvent -= () => localClickCounter--;
+        Events.Instance.ZoneClickEvent -= RestartLoop;
+        Events.Instance.ZoneClickEvent -= MoveZone;
+        Events.Instance.ZoneClickEvent -= CalculateTouchZone;
+        Events.Instance.ZoneClickEvent -= CameraScript.Instance.ChangeCameraFOVAnimation;
+
+        Events.Instance.GreenZoneClickEvent -= Events.Instance.ZoneClickEvent.Invoke;
+        Events.Instance.BlueZoneClickEvent -= Events.Instance.ZoneClickEvent.Invoke;
     }
 
 
@@ -63,25 +69,13 @@ public class ProgressBar1 : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (gameObject.GetComponent<Slider>().value >= greenRangeNeg && gameObject.GetComponent<Slider>().value <= greenRangePos)
+            if (slider.value >= greenRangeBot && slider.value <= greenRangeTop)
             {
-                localClickCounter++;
-                GameController.Instance.IncreaseScore(500);
-                StopLoop();
-                MoveZone();
-                CalculateTouchZone();
-                Events.Instance.restartTimer?.Invoke();
-                //Effect
+                Events.Instance.GreenZoneClickEvent?.Invoke();
             }
-            else if (gameObject.GetComponent<Slider>().value >= blueRangeNeg && gameObject.GetComponent<Slider>().value <= blueRangePos)
+            else if (slider.value >= blueRangeBot && slider.value <= blueRangeTop)
             {
-                localClickCounter++;
-                GameController.Instance.IncreaseScore(1500);
-                StopLoop();
-                MoveZone();
-                CalculateTouchZone();
-                Events.Instance.restartTimer?.Invoke();
-                //Super effect
+                Events.Instance.BlueZoneClickEvent?.Invoke();
             }
             else
             {
@@ -89,41 +83,43 @@ public class ProgressBar1 : MonoBehaviour
             }
         }
 
-        if (localClickCounter == GameController.Instance.clickCounter)
+        if (localClickCounter == 0)
         {
             Events.Instance.WinEvent.Invoke();
         }
-
-
     }
 
     private void StartLoop()
     {
-        gameObject.GetComponent<Slider>().value = 0;
-        tween = gameObject.GetComponent<Slider>().DOValue(gameObject.GetComponent<Slider>().maxValue, timeToReach).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear).SetAutoKill(false);
+        slider.value = 0;
+
+        tween = slider.DOValue(slider.maxValue, timeToReach).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
     }
 
-    private void StopLoop()
+    private void RestartLoop()
     {
         tween.Kill();
-        tween = gameObject.GetComponent<Slider>().DOValue(0, .3f).OnComplete(StartLoop);
+
+        tween = slider.DOValue(0, .3f).OnComplete(StartLoop);
     }
 
     private void MoveZone()
     {
         zonePosition = Random.Range(-possibleRandomRange, possibleRandomRange);
+
         zonesFolder.DOLocalMoveY(zonePosition, .2f);
+
         CalculateTouchZone();
     }
 
     private void CalculateTouchZone()
     {
-        centerZonePosition = zonePosition + halfSliderHeight;
+        centerZonePosition = zonePosition + sliderHeight / 2;
 
-        greenRangePos = (centerZonePosition + halfZoneHeight) / sliderHeight;
-        greenRangeNeg = (centerZonePosition - Mathf.Abs(blueZone.rect.height - greenZone.rect.height) / 2) / sliderHeight;
+        greenRangeTop = (centerZonePosition + zonesFolder.rect.height / 2) / sliderHeight;
+        greenRangeBot = (centerZonePosition - Mathf.Abs(blueZone.rect.height - greenZone.rect.height) / 2) / sliderHeight;
 
-        blueRangePos = greenRangeNeg;
-        blueRangeNeg = greenRangeNeg - blueZone.rect.height / sliderHeight;
+        blueRangeTop = greenRangeBot;
+        blueRangeBot = greenRangeBot - blueZone.rect.height / sliderHeight;
     }
 }

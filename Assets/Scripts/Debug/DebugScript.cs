@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using System.Reflection;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 class DebugScript : MonoBehaviour
@@ -58,6 +60,11 @@ class DebugScript : MonoBehaviour
         {
             //check states of current level
             SceneController.RestartScene();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Debug.Log(Events.Instance.ZoneClickEvent.GetInvocationList().Length);
         }
 
     }
