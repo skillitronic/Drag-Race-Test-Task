@@ -55,7 +55,7 @@ public class UIController : MonoBehaviour
         //You need to add 1 more character to not broke the animation
         winnerTextAnimation.Play
             (
-            text: "WINNERr",
+            text: "WINNER0",
             speed: 5f,
             onComplete: () =>
                 {
@@ -76,7 +76,10 @@ public class UIController : MonoBehaviour
             scoreText.SetText(number.ToString());
             yield return new WaitForSeconds(.02f);
         }
-        yield return new WaitForSeconds(1f);
-        scoreText.DOFade(0, 1f).OnComplete(() => scoreText.gameObject.SetActive(false));
+        scoreText.DOFade(0, 1f).OnComplete(() =>
+        {
+            scoreText.gameObject.SetActive(false);
+            SceneController.AddSceneByName("UpgradeScene");
+        }).SetDelay(1f);
     }
 }

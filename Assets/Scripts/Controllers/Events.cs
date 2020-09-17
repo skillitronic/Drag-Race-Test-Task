@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class Events : MonoBehaviour
@@ -15,6 +14,7 @@ public class Events : MonoBehaviour
     public UnityAction ZoneClickEvent;
     public UnityAction GreenZoneClickEvent;
     public UnityAction BlueZoneClickEvent;
+    public UnityAction check;
 
     private void Awake()
     {

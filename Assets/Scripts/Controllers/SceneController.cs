@@ -1,8 +1,8 @@
 ﻿using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class SceneController
 {
-
     public static void LoadSceneByName(string name)
     {
         SceneManager.LoadScene(name, LoadSceneMode.Single);
@@ -15,7 +15,7 @@ public class SceneController
 
     public static void UnloadSceneByName(string name)
     {
-        SceneManager.UnloadSceneAsync(name);
+        SceneManager.UnloadSceneAsync(name,UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
     }
 
     public static void RestartScene()

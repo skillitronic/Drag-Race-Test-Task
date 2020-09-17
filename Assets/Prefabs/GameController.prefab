@@ -3540,7 +3540,6 @@ MonoBehaviour:
   levelList:
   - {fileID: 11400000, guid: 07e7baee83a45194abba98dc4bc96a52, type: 2}
   - {fileID: 11400000, guid: f0efa2e925967414399c74d66bcc70eb, type: 2}
-  gameCamera: {fileID: 0}
   instantiater: {fileID: 0}
   score: 0
   clicksToWin: 4

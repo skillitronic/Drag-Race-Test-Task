@@ -24,7 +24,6 @@ public class ProgressBar1 : MonoBehaviour
 
     private int localClickCounter;
 
-
     private void Awake()
     {
         localClickCounter = GameController.Instance.clicksToWin;

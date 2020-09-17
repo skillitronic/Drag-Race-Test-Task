@@ -1,5 +1,4 @@
-﻿
-[System.Serializable]
+﻿[System.Serializable]
 public class SaveData
 {
     private static SaveData _current;
