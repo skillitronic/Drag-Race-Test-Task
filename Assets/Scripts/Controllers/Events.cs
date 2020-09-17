@@ -16,7 +16,6 @@ public class Events : MonoBehaviour
     public UnityAction GreenZoneClickEvent;
     public UnityAction BlueZoneClickEvent;
 
-
     private void Awake()
     {
         Instance = this;

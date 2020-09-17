@@ -33,11 +33,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        if (levelList[SaveData.Current.levelIndex].isWon == false)
-        {
-            Instantiate(levelList[SaveData.Current.levelIndex].levelReference, instantiater);
-            Events.Instance.StartTimerEvent.Invoke();
-        }
+        SpawnLevel();
     }
 
     public void IncreaseScore(int amount)
@@ -45,5 +41,13 @@ public class GameController : MonoBehaviour
         score += amount;
     }
 
+    private void SpawnLevel()
+    {
+        if (levelList[SaveData.Current.levelIndex].isWon == false)
+        {
+            Instantiate(levelList[SaveData.Current.levelIndex].levelReference, instantiater);
+            Events.Instance.StartTimerEvent.Invoke();
+        }
+    }
 
 }

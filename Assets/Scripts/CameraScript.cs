@@ -31,7 +31,8 @@ public class CameraScript : MonoBehaviour
         Instance = this;
         gameCamera.fieldOfView = cameraFOV;
 
-        tween = gameCamera.DOFieldOfView(cameraFOV + cameraFOVIncreaser, FOVTimeAnimation).SetEase(easeType).OnComplete(() => gameCamera.DOFieldOfView(cameraFOV, FOVTimeAnimation).SetEase(easeType).SetDelay(FOVTimeDelay));
+        tween = gameCamera.DOFieldOfView(cameraFOV + cameraFOVIncreaser, FOVTimeAnimation).SetEase(easeType).OnComplete(() => gameCamera.DOFieldOfView(cameraFOV, FOVTimeAnimation).SetEase(easeType).SetDelay(FOVTimeDelay)).SetAutoKill(false);
+        tween.Pause();
     }
 
     private void Start()
@@ -56,6 +57,11 @@ public class CameraScript : MonoBehaviour
             return;
         }
         tween.Play();
+
+        if (tween.IsPlaying() == false)
+        {
+            tween.Restart();
+        }
     }
 
     private void MoveCameraToCar()

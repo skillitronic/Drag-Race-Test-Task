@@ -128,10 +128,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1953222389, guid: 42aa88650b9c82c4287c3a8f4b735709, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3061674056967037890, guid: 42aa88650b9c82c4287c3a8f4b735709,
         type: 3}
       propertyPath: gameCamera
@@ -202,8 +198,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameController
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1953222389, guid: 42aa88650b9c82c4287c3a8f4b735709, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42aa88650b9c82c4287c3a8f4b735709, type: 3}
 --- !u!4 &648699326 stripped
 Transform:

@@ -52,7 +52,7 @@ public class UIController : MonoBehaviour
         winnerTextAnimation.gameObject.SetActive(true);
         scoreText.gameObject.SetActive(false);
 
-//You need to add 1 more character to not broke the animation
+        //You need to add 1 more character to not broke the animation
         winnerTextAnimation.Play
             (
             text: "WINNERr",
@@ -69,17 +69,14 @@ public class UIController : MonoBehaviour
     private IEnumerator ScoreAnimation()
     {
         float number = 0;
-        while (true)
+        while (number < GameController.Instance.score)
         {
-            if (number < GameController.Instance.score)
-            {
 
-                number += 25;
-                scoreText.SetText(number.ToString());
-                yield return new WaitForSeconds(.05f);
-            }
-            yield return new WaitForSeconds(1f);
-            scoreText.DOFade(0, 1f).OnComplete(() => scoreText.gameObject.SetActive(false));
+            number += 25;
+            scoreText.SetText(number.ToString());
+            yield return new WaitForSeconds(.02f);
         }
+        yield return new WaitForSeconds(1f);
+        scoreText.DOFade(0, 1f).OnComplete(() => scoreText.gameObject.SetActive(false));
     }
 }
