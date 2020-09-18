@@ -16,7 +16,7 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private TMP_Typewriter winnerTextAnimation = null;
 
-    private Tween tween;
+    private readonly Tween tween;
 
     private void Awake()
     {
@@ -25,12 +25,12 @@ public class UIController : MonoBehaviour
 
     private void OnEnable()
     {
-        Events.Instance.WinEvent.AddListener(WinShit);
+        Events.Instance.WinEvent.AddListener(WinText);
     }
 
     private void OnDisable()
     {
-        Events.Instance.WinEvent.RemoveListener(WinShit);
+        Events.Instance.WinEvent.RemoveListener(WinText);
     }
 
     public void FadeInCanvas(GameObject gameObject)
@@ -47,7 +47,7 @@ public class UIController : MonoBehaviour
         gameObject.GetComponent<CanvasGroup>().DOFade(0, fadeOutTimer).OnComplete(() => gameObject.SetActive(false));
     }
 
-    public void WinShit()
+    public void WinText()
     {
         winnerTextAnimation.gameObject.SetActive(true);
         scoreText.gameObject.SetActive(false);
@@ -79,7 +79,8 @@ public class UIController : MonoBehaviour
         scoreText.DOFade(0, 1f).OnComplete(() =>
         {
             scoreText.gameObject.SetActive(false);
-            SceneController.AddSceneByName("UpgradeScene");
+            Events.Instance.UpgradeEvent?.Invoke();
+
         }).SetDelay(1f);
     }
 }

@@ -26,7 +26,6 @@ public class ProgressBar1 : MonoBehaviour
 
     private void Awake()
     {
-        localClickCounter = GameController.Instance.clicksToWin;
 
         sliderHeight = GetComponent<RectTransform>().rect.height;
 
@@ -39,6 +38,12 @@ public class ProgressBar1 : MonoBehaviour
         StartLoop();
     }
 
+    private void OnEnable()
+    {
+        timeToReach -= SaveData.Current.levelIndex * 0.05f;
+        localClickCounter = GameController.Instance.clicksToWin;
+    }
+
     private void Start()
     {
         Events.Instance.ZoneClickEvent += () => localClickCounter--;
@@ -48,6 +53,7 @@ public class ProgressBar1 : MonoBehaviour
 
         Events.Instance.GreenZoneClickEvent += Events.Instance.ZoneClickEvent.Invoke;
         Events.Instance.BlueZoneClickEvent += Events.Instance.ZoneClickEvent.Invoke;
+
     }
 
     private void OnDisable()

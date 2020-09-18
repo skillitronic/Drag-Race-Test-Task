@@ -25,6 +25,10 @@ public class GameController : MonoBehaviour
         Events.Instance.BlueZoneClickEvent += () => IncreaseScore(1500);
 
         Events.Instance.WinEvent.AddListener(() => levelList[SaveData.Current.levelIndex].isWon = true);
+        Events.Instance.LoseEvent.AddListener(SceneController.RestartScene);
+
+        Events.Instance.UpgradeEvent += () => SceneController.AddSceneByName("UpgradeScene");
+        Events.Instance.UpgradeEvent += DestroyLevel;
     }
 
     private void OnDisable()
@@ -44,7 +48,7 @@ public class GameController : MonoBehaviour
         score += amount;
     }
 
-    private void SpawnLevel()
+    public void SpawnLevel()
     {
         if (levelList[SaveData.Current.levelIndex].isWon == false)
         {
@@ -53,6 +57,19 @@ public class GameController : MonoBehaviour
         } else if (levelList[SaveData.Current.levelIndex].isWon == true && levelList[SaveData.Current.levelIndex].isChosen == false)
         {
             SceneController.AddSceneByName("UpgradeScene");
+        } else if (levelList[SaveData.Current.levelIndex].isWon == true && levelList[SaveData.Current.levelIndex].isChosen == true)
+        {
+            levelList[SaveData.Current.levelIndex].isChosen = false;
+            levelList[SaveData.Current.levelIndex].isWon = false;
+            Instantiate(levelList[SaveData.Current.levelIndex].levelReference, instantiater);
+        }
+    }
+
+    private void DestroyLevel()
+    {
+        for (int i = 0; i < instantiater.childCount; i++)
+        {
+            Destroy(instantiater.GetChild(i).gameObject);
         }
     }
 

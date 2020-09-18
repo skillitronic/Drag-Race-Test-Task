@@ -15,7 +15,7 @@ public class SceneController
 
     public static void UnloadSceneByName(string name)
     {
-        SceneManager.UnloadSceneAsync(name,UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+        SceneManager.UnloadSceneAsync(name);
     }
 
     public static void RestartScene()

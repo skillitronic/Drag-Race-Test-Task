@@ -24,11 +24,13 @@ public class CameraScript : MonoBehaviour
     [SerializeField] private Vector3 cameraOffset =  new Vector3(0,0,0);
     [SerializeField] private float moveTimeAnimation = 0;
 
+    private Vector3 cameraStartPosition;
     private Tween tween;
 
     private void Awake()
     {
         Instance = this;
+        cameraStartPosition = transform.position;
         gameCamera.fieldOfView = cameraFOV;
 
         tween = gameCamera.DOFieldOfView(cameraFOV + cameraFOVIncreaser, FOVTimeAnimation).SetEase(easeType).OnComplete(() => gameCamera.DOFieldOfView(cameraFOV, FOVTimeAnimation).SetEase(easeType).SetDelay(FOVTimeDelay)).SetAutoKill(false);
@@ -37,7 +39,10 @@ public class CameraScript : MonoBehaviour
 
     private void Start()
     {
+        Events.Instance.WinEvent.AddListener(() => transform.position = cameraStartPosition);
+
         Events.Instance.StartGameEvent.AddListener(MoveCameraToCar);
+
         Events.Instance.ZoneClickEvent += ChangeCameraFOVAnimation;
         Events.Instance.ZoneClickEvent += () => speedParticles.SetActive(true);
     }

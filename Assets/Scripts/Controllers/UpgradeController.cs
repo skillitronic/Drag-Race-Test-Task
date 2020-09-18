@@ -10,6 +10,13 @@ public class UpgradeController : MonoBehaviour
 
     private void OnEnable()
     {
+        Events.Instance.UpgradeButtonEvent += () => GameController.Instance.score = 0;
+        Events.Instance.UpgradeButtonEvent += () => GameController.Instance.levelList[SaveData.Current.levelIndex].isChosen = true;
+        Events.Instance.UpgradeButtonEvent += () => SaveData.Current.levelIndex += 1;
+        Events.Instance.UpgradeButtonEvent += () => SaveSystem.Save("levels", SaveData.Current.levelIndex);
+        Events.Instance.UpgradeButtonEvent += () => GameController.Instance.SpawnLevel();
+        Events.Instance.UpgradeButtonEvent += () => SceneController.UnloadSceneByName("UpgradeScene");
+
         for (int i = 0; i < upgradeImages.Length; i++)
         {
             upgradeImages[i].sprite = GameController.Instance.levelList[SaveData.Current.levelIndex].upgrades[i].image;
@@ -18,17 +25,21 @@ public class UpgradeController : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        Events.Instance.UpgradeButtonEvent -= () => GameController.Instance.score = 0;
+        Events.Instance.UpgradeButtonEvent -= () => GameController.Instance.levelList[SaveData.Current.levelIndex].isChosen = true;
+        Events.Instance.UpgradeButtonEvent -= () => SaveData.Current.levelIndex += 1;
+        Events.Instance.UpgradeButtonEvent -= () => SaveSystem.Save("levels", SaveData.Current.levelIndex);
+        Events.Instance.UpgradeButtonEvent -= () => GameController.Instance.SpawnLevel();
+        Events.Instance.UpgradeButtonEvent -= () => SceneController.UnloadSceneByName("UpgradeScene");
+    }
+
     private void EquipUpgrade()
     {
         if (GameController.Instance.score >= GameController.Instance.levelList[SaveData.Current.levelIndex].upgrades[transform.GetSiblingIndex()].cost)
         {
-            Debug.Log(GameController.Instance.levelList[SaveData.Current.levelIndex].upgrades[transform.GetSiblingIndex()].cost);
-            //GameController.Instance.score = 1000;
-            //GameController.Instance.levelList[SaveData.Current.levelIndex].isChosen = true;
-            //SaveData.Current.levelIndex += 1;
-            // need to move somewhere else
-            //SaveSystem.Save("levels", SaveData.Current.levelIndex);
-            //SceneController.UnloadSceneByName("UpgradeScene");
+            Events.Instance.UpgradeButtonEvent?.Invoke();
         }
     }
 }

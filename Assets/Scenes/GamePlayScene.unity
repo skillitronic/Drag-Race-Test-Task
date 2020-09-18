@@ -136,7 +136,7 @@ PrefabInstance:
     - target: {fileID: 3061674056967037890, guid: 42aa88650b9c82c4287c3a8f4b735709,
         type: 3}
       propertyPath: clicksToWin
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3061674056967037890, guid: 42aa88650b9c82c4287c3a8f4b735709,
         type: 3}

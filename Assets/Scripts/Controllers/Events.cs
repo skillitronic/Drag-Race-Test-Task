@@ -14,12 +14,12 @@ public class Events : MonoBehaviour
     public UnityAction ZoneClickEvent;
     public UnityAction GreenZoneClickEvent;
     public UnityAction BlueZoneClickEvent;
-    public UnityAction check;
+
+    public UnityAction UpgradeEvent;
+    public UnityAction UpgradeButtonEvent;
 
     private void Awake()
     {
         Instance = this;
     }
-
-
 }

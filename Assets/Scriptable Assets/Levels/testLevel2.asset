@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539495fd9ac56344c95ad16b4acf19f5, type: 3}
   m_Name: testLevel2
   m_EditorClassIdentifier: 
-  levelReference: {fileID: 3270971606893392930, guid: 2b0ccd306c0a15d45ab637b8e683a10b,
+  levelReference: {fileID: 2879598594277789019, guid: 50a7bb906272f804fb7500664e449dab,
     type: 3}
   isWon: 0
   isChosen: 0
+  upgrades:
+  - {fileID: 11400000, guid: f7e797c1aa1e28f419ddfc366519a888, type: 2}
+  - {fileID: 11400000, guid: 6862cbf3b42fc6241a4e9007515d553d, type: 2}
+  - {fileID: 11400000, guid: 242457c66892cf242a70e52d0ac42628, type: 2}
