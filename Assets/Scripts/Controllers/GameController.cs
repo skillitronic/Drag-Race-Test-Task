@@ -54,14 +54,17 @@ public class GameController : MonoBehaviour
         {
             Instantiate(levelList[SaveData.Current.levelIndex].levelReference, instantiater);
             Events.Instance.StartTimerEvent.Invoke();
-        } else if (levelList[SaveData.Current.levelIndex].isWon == true && levelList[SaveData.Current.levelIndex].isChosen == false)
+        }
+        else if (levelList[SaveData.Current.levelIndex].isWon == true && levelList[SaveData.Current.levelIndex].isChosen == false)
         {
             SceneController.AddSceneByName("UpgradeScene");
-        } else if (levelList[SaveData.Current.levelIndex].isWon == true && levelList[SaveData.Current.levelIndex].isChosen == true)
+        }
+        else if (levelList[SaveData.Current.levelIndex].isWon == true && levelList[SaveData.Current.levelIndex].isChosen == true)
         {
             levelList[SaveData.Current.levelIndex].isChosen = false;
             levelList[SaveData.Current.levelIndex].isWon = false;
             Instantiate(levelList[SaveData.Current.levelIndex].levelReference, instantiater);
+            Events.Instance.StartTimerEvent.Invoke();
         }
     }
 

@@ -1,14 +1,12 @@
-﻿using UnityEditor;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 
 public class CameraRotator : MonoBehaviour
 {
-    public Transform target;
-    [SerializeField] private float orbitDegreesPerSec = 180.0f;
-    public bool isAutoRotating = true;
-    public bool isDragging;
-    [SerializeField] private float rotSpeed;
+    [SerializeField] private Transform target = null;
+    [SerializeField] private float orbitDegreesPerSec = 60.0f;
+    [SerializeField] private float rotSpeed = 0;
+
+    private bool isAutoRotating = true;
 
     public void Update()
     {
@@ -20,14 +18,9 @@ public class CameraRotator : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            isDragging = true;
             isAutoRotating = false;
             float rotX = Input.GetAxis("Mouse X") * rotSpeed * Mathf.Deg2Rad;
             target.Rotate(Vector3.up, -rotX);
-        }
-        else
-        {
-            isDragging = false;
         }
     }
 }
