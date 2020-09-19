@@ -15,7 +15,7 @@ MonoBehaviour:
   levelReference: {fileID: 2879598594277789019, guid: 50a7bb906272f804fb7500664e449dab,
     type: 3}
   isWon: 1
-  isChosen: 0
+  isChosen: 1
   upgrades:
   - {fileID: 11400000, guid: 97265683311d71545b53429e40c6f258, type: 2}
   - {fileID: 11400000, guid: 29870385adfdc2047825866af1a2fc11, type: 2}

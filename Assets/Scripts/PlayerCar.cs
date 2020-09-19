@@ -12,11 +12,11 @@ public class PlayerCar : MonoBehaviour
     }
     public void OnEnable()
     {
-        Events.Instance.ZoneClickEvent += () => flameParticles.SetActive(true);
+        Events.Instance.BlueZoneClickEvent += () => flameParticles.SetActive(true);
     }
 
     public void OnDisable()
     {
-        Events.Instance.ZoneClickEvent -= () => flameParticles.SetActive(true);
+        Events.Instance.BlueZoneClickEvent -= () => flameParticles.SetActive(true);
     }
 }
