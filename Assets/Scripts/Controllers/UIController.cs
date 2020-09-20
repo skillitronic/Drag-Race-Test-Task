@@ -13,10 +13,8 @@ public class UIController : MonoBehaviour
 
     public TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI scoreText = null;
-
+    [SerializeField] private TextMeshProUGUI winnerText = null;
     [SerializeField] private TMP_Typewriter winnerTextAnimation = null;
-
-    private readonly Tween tween;
 
     private void Awake()
     {
@@ -50,17 +48,14 @@ public class UIController : MonoBehaviour
     public void WinText()
     {
         winnerTextAnimation.gameObject.SetActive(true);
-        scoreText.gameObject.SetActive(false);
 
-        //You need to add 1 more character to not broke the animation
         winnerTextAnimation.Play
             (
-            text: "WINNER0",
+            text: "WINNER",
             speed: 5f,
             onComplete: () =>
                 {
-                    winnerTextAnimation.gameObject.SetActive(false);
-                    scoreText.gameObject.SetActive(true);
+                    winnerText.DOFade(0, .5f).SetDelay(.5f).OnComplete(() => winnerText.gameObject.SetActive(false));
                     StartCoroutine(nameof(ScoreAnimation));
                 }
             );
@@ -68,6 +63,8 @@ public class UIController : MonoBehaviour
 
     private IEnumerator ScoreAnimation()
     {
+        yield return new WaitForSeconds(1f);
+        scoreText.gameObject.SetActive(true);
         float number = 0;
         while (number < GameController.Instance.score)
         {

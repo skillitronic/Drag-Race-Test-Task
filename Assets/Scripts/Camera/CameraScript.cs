@@ -15,17 +15,17 @@ public class CameraScript : MonoBehaviour
     [SerializeField] private float cameraFOV = 60;
     [SerializeField] private float cameraFOVIncreaser = 0;
     [SerializeField] private float FOVTimeAnimation = 0;
-    [SerializeField] private float FOVTimeDelay = 0 ;
+    [SerializeField] private float FOVTimeDelay = 0;
     [SerializeField] private Ease easeType = Ease.InOutQuad;
 
     [Space(10f)]
     [Header("CameraMoveSettings")]
 
-    [SerializeField] private Vector3 cameraOffset =  new Vector3(0,0,0);
+    [SerializeField] private Vector3 cameraOffset = new Vector3(0, 0, 0);
     [SerializeField] private float moveTimeAnimation = 0;
 
     private Vector3 cameraStartPosition;
-    private Tween tween;
+    private bool startTrack;
 
     private void Awake()
     {
@@ -33,30 +33,42 @@ public class CameraScript : MonoBehaviour
         cameraStartPosition = transform.position;
         gameCamera.fieldOfView = cameraFOV;
 
-        tween = gameCamera.DOFieldOfView(cameraFOV + cameraFOVIncreaser, FOVTimeAnimation).SetEase(easeType).OnComplete(() => gameCamera.DOFieldOfView(cameraFOV, FOVTimeAnimation).SetEase(easeType).SetDelay(FOVTimeDelay)).SetAutoKill(false);
-        tween.Pause();
     }
 
     private void Start()
     {
-        Events.Instance.WinEvent.AddListener(() => transform.position = cameraStartPosition);
+        Events.Instance.UpgradeEvent += () => transform.position = cameraStartPosition;
 
-        Events.Instance.StartGameEvent.AddListener(MoveCameraToCar);
+        Events.Instance.StartGameEvent.AddListener(() => startTrack = true);
 
-        Events.Instance.GreenZoneClickEvent += ChangeCameraFOVAnimation;
+        Events.Instance.GreenZoneClickEvent += () => gameCamera.DOFieldOfView(cameraFOV + cameraFOVIncreaser, FOVTimeAnimation).SetEase(easeType).OnComplete(() => gameCamera.DOFieldOfView(cameraFOV, FOVTimeAnimation).SetEase(easeType).SetDelay(FOVTimeDelay)).SetAutoKill(false); ;
+
+        Events.Instance.BlueZoneClickEvent += () => gameCamera.DOFieldOfView(cameraFOV + cameraFOVIncreaser * 2f, FOVTimeAnimation).SetEase(easeType).OnComplete(() => gameCamera.DOFieldOfView(cameraFOV, FOVTimeAnimation).SetEase(easeType).SetDelay(FOVTimeDelay)).SetAutoKill(false);
         Events.Instance.BlueZoneClickEvent += () => speedParticles.SetActive(true);
     }
 
+
     private void OnDisable()
     {
-        Events.Instance.StartGameEvent.RemoveListener(MoveCameraToCar);
+        Events.Instance.UpgradeEvent -= () => transform.position = cameraStartPosition;
 
-        Events.Instance.ZoneClickEvent -= () => speedParticles.SetActive(true);
-        Events.Instance.ZoneClickEvent += ChangeCameraFOVAnimation;
+        Events.Instance.StartGameEvent.RemoveListener(() => startTrack = true);
+
+        Events.Instance.GreenZoneClickEvent -= () => gameCamera.DOFieldOfView(cameraFOV + cameraFOVIncreaser, FOVTimeAnimation).SetEase(easeType).OnComplete(() => gameCamera.DOFieldOfView(cameraFOV, FOVTimeAnimation).SetEase(easeType).SetDelay(FOVTimeDelay)).SetAutoKill(false); ;
+
+        Events.Instance.BlueZoneClickEvent -= () => gameCamera.DOFieldOfView(cameraFOV + cameraFOVIncreaser * 2f, FOVTimeAnimation).SetEase(easeType).OnComplete(() => gameCamera.DOFieldOfView(cameraFOV, FOVTimeAnimation).SetEase(easeType).SetDelay(FOVTimeDelay)).SetAutoKill(false);
+        Events.Instance.BlueZoneClickEvent -= () => speedParticles.SetActive(true);
+    }
+    private void FixedUpdate()
+    {
+        if (startTrack && playerCar != null)
+        {
+            MoveCameraToCar();
+        }
     }
 
-    public void ChangeCameraFOVAnimation()
-    {   
+/*    public void ChangeCameraFOVAnimation()
+    {
         if (tween.IsPlaying())
         {
             return;
@@ -67,11 +79,11 @@ public class CameraScript : MonoBehaviour
         {
             tween.Restart();
         }
-    }
+    }*/
 
     private void MoveCameraToCar()
     {
-        gameObject.transform.DOMove(
+        transform.DOMove(
             new Vector3(
                 playerCar.position.x,
                 playerCar.position.y + cameraOffset.y,

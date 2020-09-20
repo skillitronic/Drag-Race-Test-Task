@@ -3541,7 +3541,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 07e7baee83a45194abba98dc4bc96a52, type: 2}
   - {fileID: 11400000, guid: f0efa2e925967414399c74d66bcc70eb, type: 2}
   instantiater: {fileID: 0}
-  score: 0
+  score: 1000
   clicksToWin: 4
 --- !u!114 &625818178
 MonoBehaviour:

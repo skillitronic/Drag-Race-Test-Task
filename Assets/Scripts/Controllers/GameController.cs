@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
         Events.Instance.BlueZoneClickEvent += () => IncreaseScore(1500);
 
         Events.Instance.WinEvent.AddListener(() => levelList[SaveData.Current.levelIndex].isWon = true);
-        Events.Instance.LoseEvent.AddListener(SceneController.RestartScene);
+        //Events.Instance.LoseEvent.AddListener(SceneController.RestartScene);
 
         Events.Instance.UpgradeEvent += () => SceneController.AddSceneByName("UpgradeScene");
         Events.Instance.UpgradeEvent += DestroyLevel;
@@ -35,6 +35,12 @@ public class GameController : MonoBehaviour
     {
         Events.Instance.GreenZoneClickEvent -= () => IncreaseScore(500);
         Events.Instance.BlueZoneClickEvent -= () => IncreaseScore(1500);
+
+        Events.Instance.WinEvent.RemoveListener(() => levelList[SaveData.Current.levelIndex].isWon = true);
+        //Events.Instance.LoseEvent.RemoveListener(SceneController.RestartScene);
+
+        Events.Instance.UpgradeEvent -= () => SceneController.AddSceneByName("UpgradeScene");
+        Events.Instance.UpgradeEvent -= DestroyLevel;
 
     }
 
