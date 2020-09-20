@@ -142,7 +142,7 @@ PrefabInstance:
     - target: {fileID: 3061674056967037890, guid: 42aa88650b9c82c4287c3a8f4b735709,
         type: 3}
       propertyPath: clicksToWin
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3061674056967037892, guid: 42aa88650b9c82c4287c3a8f4b735709,
         type: 3}
@@ -526,7 +526,7 @@ PrefabInstance:
     - target: {fileID: 6872870581300841165, guid: 4e77571729c8b4b45bc66201cc5dd12a,
         type: 3}
       propertyPath: m_AllowDynamicResolution
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6872870581300841165, guid: 4e77571729c8b4b45bc66201cc5dd12a,
         type: 3}

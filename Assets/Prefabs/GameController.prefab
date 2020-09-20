@@ -3559,6 +3559,7 @@ MonoBehaviour:
   fadeOutTimer: 0.2
   timerText: {fileID: 107350475}
   scoreText: {fileID: 1232044351}
+  winnerText: {fileID: 1771658401}
   winnerTextAnimation: {fileID: 8154183013743218181}
 --- !u!114 &625818177
 MonoBehaviour:

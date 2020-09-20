@@ -37,7 +37,6 @@ public class CameraScript : MonoBehaviour
 
     private void Start()
     {
-        Events.Instance.UpgradeEvent += () => transform.position = cameraStartPosition;
 
         Events.Instance.StartGameEvent.AddListener(() => startTrack = true);
 
@@ -50,7 +49,6 @@ public class CameraScript : MonoBehaviour
 
     private void OnDisable()
     {
-        Events.Instance.UpgradeEvent -= () => transform.position = cameraStartPosition;
 
         Events.Instance.StartGameEvent.RemoveListener(() => startTrack = true);
 
@@ -64,6 +62,9 @@ public class CameraScript : MonoBehaviour
         if (startTrack && playerCar != null)
         {
             MoveCameraToCar();
+        } else
+        {
+            transform.position = cameraStartPosition;
         }
     }
 

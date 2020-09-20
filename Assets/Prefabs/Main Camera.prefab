@@ -102,11 +102,12 @@ MonoBehaviour:
   playerCar: {fileID: 0}
   cameraFOV: 60
   cameraFOVIncreaser: 10
-  FOVTimeAnimation: 1
+  FOVTimeAnimation: 0.8
   FOVTimeDelay: 0.4
   easeType: 7
   cameraOffset: {x: 0, y: 0.26, z: -0.704}
   moveTimeAnimation: 1
+  cameraStartPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &5225921992313350973
 PrefabInstance:
   m_ObjectHideFlags: 0
