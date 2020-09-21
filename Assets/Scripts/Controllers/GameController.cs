@@ -10,8 +10,6 @@ public class GameController : MonoBehaviour
 
     public int score;
 
-    public int clicksToWin;
-
 
     private void Awake()
     {

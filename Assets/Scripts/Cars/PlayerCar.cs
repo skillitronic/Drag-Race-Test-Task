@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SocialPlatforms;
 
 public class PlayerCar : Car
 {
     public GameObject flameParticles;
     private bool isCoroRunning;
+
     //List of Upgrades
 
     private void Awake()
@@ -36,17 +38,17 @@ public class PlayerCar : Car
 
     private IEnumerator IncreaseSpeedNumerator()
     {
-        float oldSpeed = speed;
-        float newSpeed = speed * 1.6f;
-        while (speed < newSpeed)
+        localSpeed = speed;
+        float newSpeed = localSpeed * 1.6f;
+        while (localSpeed < newSpeed) 
         {
-            speed += 20f;
+            localSpeed += 20f;
             yield return new WaitForSeconds(.2f);
         }
 
-        while (speed > oldSpeed)
+        while (localSpeed > speed)
         {
-            speed -= 10f;
+            localSpeed -= 10f;
             yield return new WaitForSeconds(.08f);
         }
         isCoroRunning = false;

@@ -22,7 +22,6 @@ public class ProgressBar1 : MonoBehaviour
     private float blueRangeTop;
     private float blueRangeBot;
 
-    private int localClickCounter;
 
     private void Awake()
     {
@@ -41,12 +40,10 @@ public class ProgressBar1 : MonoBehaviour
     private void OnEnable()
     {
         timeToReach -= SaveData.Current.levelIndex * 0.05f;
-        localClickCounter = GameController.Instance.clicksToWin;
     }
 
     private void Start()
     {
-        Events.Instance.ZoneClickEvent += () => localClickCounter--;
         Events.Instance.ZoneClickEvent += RestartLoop;
         Events.Instance.ZoneClickEvent += MoveZone;
         Events.Instance.ZoneClickEvent += CalculateTouchZone;
@@ -58,7 +55,6 @@ public class ProgressBar1 : MonoBehaviour
 
     private void OnDisable()
     {
-        Events.Instance.ZoneClickEvent -= () => localClickCounter--;
         Events.Instance.ZoneClickEvent -= RestartLoop;
         Events.Instance.ZoneClickEvent -= MoveZone;
         Events.Instance.ZoneClickEvent -= CalculateTouchZone;
@@ -84,11 +80,6 @@ public class ProgressBar1 : MonoBehaviour
             {
                 Events.Instance.LoseEvent.Invoke();
             }
-        }
-
-        if (localClickCounter == 0)
-        {
-            Events.Instance.WinEvent.Invoke();
         }
     }
 

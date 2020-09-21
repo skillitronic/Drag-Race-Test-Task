@@ -3,11 +3,12 @@ public abstract class Car : MonoBehaviour
 {
     [SerializeField] protected float speed = 1;
     [SerializeField] protected bool startMove;
+    protected float localSpeed;
     protected Rigidbody rb;
     private void OnEnable()
     {
         rb = GetComponent<Rigidbody>();
-
+        localSpeed = speed;
         Events.Instance.StartGameEvent.AddListener(() => startMove = true);
         Events.Instance.WinEvent.AddListener(() => startMove = false);
     }
@@ -22,7 +23,7 @@ public abstract class Car : MonoBehaviour
     {
         if (startMove)
         {
-            rb.velocity = -transform.forward * speed * Time.fixedDeltaTime;
+            rb.velocity = -transform.forward * localSpeed * Time.fixedDeltaTime;
         } else
         {
             if (rb.velocity.z > 0)
