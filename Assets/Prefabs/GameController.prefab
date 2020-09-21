@@ -3540,9 +3540,15 @@ MonoBehaviour:
   levelList:
   - {fileID: 11400000, guid: 07e7baee83a45194abba98dc4bc96a52, type: 2}
   - {fileID: 11400000, guid: f0efa2e925967414399c74d66bcc70eb, type: 2}
+  - {fileID: 11400000, guid: dea49d6edb76df74d8ef0f1ae7ef14bc, type: 2}
+  - {fileID: 11400000, guid: b8311295a3d06ce46950df14d9be7836, type: 2}
+  - {fileID: 11400000, guid: 5f97ac2cd1d113c42a3c9e46fd2bb6ff, type: 2}
+  - {fileID: 11400000, guid: 3b37dee0133aac84c96841093d7df6a3, type: 2}
+  - {fileID: 11400000, guid: 4bd89bdd4d01d7f46b69e5658f8e4b80, type: 2}
+  - {fileID: 11400000, guid: 46d754536d08d5c45a02f81d1e8efb9a, type: 2}
+  - {fileID: 11400000, guid: a76cbd466210b5341a0ccca9a8bd7bf6, type: 2}
   instantiater: {fileID: 0}
   score: 1000
-  clicksToWin: 4
 --- !u!114 &625818178
 MonoBehaviour:
   m_ObjectHideFlags: 0
