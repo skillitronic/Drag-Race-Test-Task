@@ -16,4 +16,7 @@ MonoBehaviour:
     type: 3}
   isWon: 0
   isChosen: 0
-  upgrades: []
+  upgrades:
+  - {fileID: 11400000, guid: f7e797c1aa1e28f419ddfc366519a888, type: 2}
+  - {fileID: 11400000, guid: 242457c66892cf242a70e52d0ac42628, type: 2}
+  - {fileID: 11400000, guid: 6862cbf3b42fc6241a4e9007515d553d, type: 2}

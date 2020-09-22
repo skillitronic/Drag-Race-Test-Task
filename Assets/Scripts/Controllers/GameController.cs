@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; }
 
     public List<Level> levelList = null;
+    public EquipedUpgrades equipedUpgrades = null;
 
     public Transform instantiater;
 
@@ -80,4 +82,23 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void CheckForUpgrades()
+    {
+        if (!levelList[SaveData.Current.levelIndex].upgrades.Any())
+        {
+            score = 0;
+            levelList[SaveData.Current.levelIndex].isChosen = true;
+            SaveData.Current.levelIndex += 1;
+            SaveSystem.Save("levels", SaveData.Current.levelIndex);
+            DestroyLevel();
+            SpawnLevel();
+            SceneController.UnloadSceneByName("UpgradeScene");
+
+        }
+        else
+        {
+            DestroyLevel();
+            SceneController.AddSceneByName("UpgradeScene");
+        }
+    }
 }

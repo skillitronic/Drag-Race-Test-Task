@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 539495fd9ac56344c95ad16b4acf19f5, type: 3}
-  m_Name: Level20
+  m_Script: {fileID: 11500000, guid: 1a3c9c5328f766444914e220c412dc07, type: 3}
+  m_Name: Upgrade List
   m_EditorClassIdentifier: 
-  levelReference: {fileID: 2879598594277789019, guid: 76762db6ad2e0eb4ca3d9eabcf33cdcd,
-    type: 3}
-  isWon: 0
-  isChosen: 0
-  upgrades: []
+  upgradeList: []

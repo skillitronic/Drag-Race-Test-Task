@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4317a3abd51d6c48acbd0fe1f72cc27, type: 3}
-  m_Name: Upgrade4_2
+  m_Script: {fileID: 11500000, guid: 539495fd9ac56344c95ad16b4acf19f5, type: 3}
+  m_Name: Level0
   m_EditorClassIdentifier: 
-  cost: 1000
-  image: {fileID: 21300000, guid: 6d4eec38dbe2fe14c8f23f0267c3c9a6, type: 3}
+  levelReference: {fileID: 2879598594277789019, guid: 50a7bb906272f804fb7500664e449dab,
+    type: 3}
+  isWon: 0
+  isChosen: 0
+  upgrades: []

@@ -39,7 +39,7 @@ public class ProgressBar1 : MonoBehaviour
 
     private void OnEnable()
     {
-        timeToReach -= SaveData.Current.levelIndex * 0.05f;
+        timeToReach -= GameController.Instance.equipedUpgrades.upgradeList.Count * 0.05f;
     }
 
     private void Start()
