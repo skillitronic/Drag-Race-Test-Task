@@ -6,11 +6,16 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get; private set; }
 
     public List<Level> levelList = null;
+
+    [Space(10f)]
     public EquipedUpgrades equipedUpgrades = null;
 
     public Transform instantiater;
 
     public int score;
+
+    [HideInInspector] public Transform carReference;
+    [HideInInspector] public Transform finishLineReference;
 
 
     private void Awake()
@@ -25,10 +30,7 @@ public class GameController : MonoBehaviour
         Events.Instance.BlueZoneClickEvent += () => IncreaseScore(1500);
 
         Events.Instance.WinEvent.AddListener(() => levelList[SaveData.Current.levelIndex].isWon = true);
-        //Events.Instance.LoseEvent.AddListener(SceneController.RestartScene);
-
-        Events.Instance.UpgradeEvent += () => SceneController.AddSceneByName("UpgradeScene");
-        Events.Instance.UpgradeEvent += DestroyLevel;
+        Events.Instance.UpgradeEvent += CheckForUpgrades;
     }
 
     private void OnDisable()
@@ -37,10 +39,7 @@ public class GameController : MonoBehaviour
         Events.Instance.BlueZoneClickEvent -= () => IncreaseScore(1500);
 
         Events.Instance.WinEvent.RemoveListener(() => levelList[SaveData.Current.levelIndex].isWon = true);
-        //Events.Instance.LoseEvent.RemoveListener(SceneController.RestartScene);
-
-        Events.Instance.UpgradeEvent -= () => SceneController.AddSceneByName("UpgradeScene");
-        Events.Instance.UpgradeEvent -= DestroyLevel;
+        Events.Instance.UpgradeEvent -= CheckForUpgrades;
 
     }
 
@@ -92,7 +91,6 @@ public class GameController : MonoBehaviour
             SaveSystem.Save("levels", SaveData.Current.levelIndex);
             DestroyLevel();
             SpawnLevel();
-            SceneController.UnloadSceneByName("UpgradeScene");
 
         }
         else

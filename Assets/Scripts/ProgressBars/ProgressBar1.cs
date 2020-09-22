@@ -61,6 +61,8 @@ public class ProgressBar1 : MonoBehaviour
 
         Events.Instance.GreenZoneClickEvent -= Events.Instance.ZoneClickEvent.Invoke;
         Events.Instance.BlueZoneClickEvent -= Events.Instance.ZoneClickEvent.Invoke;
+
+        timeToReach = 2;
     }
 
 

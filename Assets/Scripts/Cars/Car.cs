@@ -2,13 +2,14 @@
 public abstract class Car : MonoBehaviour
 {
     [SerializeField] protected float speed = 1;
-    [SerializeField] protected bool startMove;
+    protected bool startMove;
     protected float localSpeed;
     protected Rigidbody rb;
     private void OnEnable()
     {
         rb = GetComponent<Rigidbody>();
         localSpeed = speed;
+
         Events.Instance.StartGameEvent.AddListener(() => startMove = true);
         Events.Instance.WinEvent.AddListener(() => startMove = false);
     }

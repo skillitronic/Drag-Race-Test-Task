@@ -11,6 +11,7 @@ public class PlayerCar : Car
 
     private void Awake()
     {
+        GameController.Instance.carReference = transform;
         CameraScript.Instance.playerCar = transform;
     }
     public void Start()

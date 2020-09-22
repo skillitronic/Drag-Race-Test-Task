@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
     public TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI scoreText = null;
     [SerializeField] private TextMeshProUGUI winnerText = null;
+    [SerializeField] private TextMeshProUGUI loseText = null;
     [SerializeField] private TMP_Typewriter winnerTextAnimation = null;
 
     private void Awake()
@@ -24,11 +25,13 @@ public class UIController : MonoBehaviour
     private void OnEnable()
     {
         Events.Instance.WinEvent.AddListener(WinText);
+        Events.Instance.LoseEvent.AddListener(LoseText);
     }
 
     private void OnDisable()
     {
         Events.Instance.WinEvent.RemoveListener(WinText);
+        Events.Instance.LoseEvent.RemoveListener(LoseText);
     }
 
     public void FadeInCanvas(GameObject gameObject)
@@ -59,6 +62,11 @@ public class UIController : MonoBehaviour
                     StartCoroutine(nameof(ScoreAnimation));
                 }
             );
+    }
+
+    public void LoseText()
+    {
+        loseText.DOFade(0, 3f).SetDelay(1f).OnComplete(SceneController.RestartScene);
     }
 
     private IEnumerator ScoreAnimation()

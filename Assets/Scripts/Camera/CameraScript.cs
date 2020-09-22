@@ -7,7 +7,7 @@ public class CameraScript : MonoBehaviour
 
     [SerializeField] private Camera gameCamera = null;
     [SerializeField] private GameObject speedParticles = null;
-    [HideInInspector] public Transform playerCar = null;
+    [HideInInspector]public Transform playerCar;
 
     [Space(10f)]
     [Header("CameraFovSettings")]
@@ -44,8 +44,10 @@ public class CameraScript : MonoBehaviour
 
         Events.Instance.BlueZoneClickEvent += () => gameCamera.DOFieldOfView(cameraFOV + cameraFOVIncreaser * 2f, FOVTimeAnimation).SetEase(easeType).OnComplete(() => gameCamera.DOFieldOfView(cameraFOV, FOVTimeAnimation).SetEase(easeType).SetDelay(FOVTimeDelay)).SetAutoKill(false);
         Events.Instance.BlueZoneClickEvent += () => speedParticles.SetActive(true);
-    }
 
+        Events.Instance.UpgradeEvent += () => startTrack = false;
+
+    }
 
     private void OnDisable()
     {
@@ -56,39 +58,47 @@ public class CameraScript : MonoBehaviour
 
         Events.Instance.BlueZoneClickEvent -= () => gameCamera.DOFieldOfView(cameraFOV + cameraFOVIncreaser * 2f, FOVTimeAnimation).SetEase(easeType).OnComplete(() => gameCamera.DOFieldOfView(cameraFOV, FOVTimeAnimation).SetEase(easeType).SetDelay(FOVTimeDelay)).SetAutoKill(false);
         Events.Instance.BlueZoneClickEvent -= () => speedParticles.SetActive(true);
+
+        Events.Instance.UpgradeEvent += () => startTrack = false;
+
+        playerCar = null;
+
     }
-    private void FixedUpdate()
+
+    private void Update()
     {
-        if (startTrack && playerCar != null)
-        {
-            MoveCameraToCar();
-        } else
+        if (startTrack == false)
         {
             transform.position = cameraStartPosition;
         }
     }
 
-/*    public void ChangeCameraFOVAnimation()
+    private void FixedUpdate()
     {
-        if (tween.IsPlaying())
-        {
-            return;
-        }
-        tween.Play();
 
-        if (tween.IsPlaying() == false)
+        if (startTrack && playerCar != null)
         {
-            tween.Restart();
+            MoveCameraToCar();
         }
-    }*/
+
+    }
 
     private void MoveCameraToCar()
     {
-        transform.DOMove(
+        Tween tween = transform.DOMove(
             new Vector3(
                 playerCar.position.x,
                 playerCar.position.y + cameraOffset.y,
                 playerCar.position.z + cameraOffset.z),
             moveTimeAnimation);
+
+        if (startTrack)
+        {
+            tween.Play();
+        }
+        else
+        {
+            tween.Kill();
+        }
     }
 }

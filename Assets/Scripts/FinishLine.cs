@@ -6,6 +6,11 @@ public class FinishLine : MonoBehaviour
 {
     private bool hasCrossed;
 
+    private void OnEnable()
+    {
+        GameController.Instance.finishLineReference = transform;
+    }
+
     private void OnDisable()
     {
         hasCrossed = false;
