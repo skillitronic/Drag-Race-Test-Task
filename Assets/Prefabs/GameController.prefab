@@ -3031,6 +3031,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1877865962}
   - component: {fileID: 1877865963}
+  - component: {fileID: 876971446}
   m_Layer: 5
   m_Name: Progress_Slider
   m_TagString: Untagged
@@ -3109,6 +3110,21 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &876971446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877865961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d26d95f48791b146b55bc459c0f9e17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 1877865963}
+  playerCar: {fileID: 0}
+  finishLine: {fileID: 0}
 --- !u!1 &1932448205
 GameObject:
   m_ObjectHideFlags: 0
@@ -3293,6 +3309,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4278190335
   maxTimer: 3
+  timer: 0
 --- !u!1 &1985094820
 GameObject:
   m_ObjectHideFlags: 0
@@ -3561,6 +3578,8 @@ MonoBehaviour:
   equipedUpgrades: {fileID: 11400000, guid: 279fc204671754147acc8d88f3081a48, type: 2}
   instantiater: {fileID: 0}
   score: 1000
+  carReference: {fileID: 0}
+  finishLineReference: {fileID: 0}
 --- !u!114 &625818178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3578,6 +3597,7 @@ MonoBehaviour:
   timerText: {fileID: 107350475}
   scoreText: {fileID: 1232044351}
   winnerText: {fileID: 1771658401}
+  loseText: {fileID: 1145885887}
   winnerTextAnimation: {fileID: 8154183013743218181}
 --- !u!114 &625818177
 MonoBehaviour:

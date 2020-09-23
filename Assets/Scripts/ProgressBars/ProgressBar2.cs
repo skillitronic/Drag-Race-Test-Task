@@ -11,16 +11,21 @@ public class ProgressBar2 : MonoBehaviour
 
     [SerializeField] private float maxTimer = 0;
 
-    private float timer;
+    public float timer;
 
-    private void Awake()
+    private void OnEnable()
     {
-        Events.Instance.ZoneClickEvent += () => slider.value = 0;
+        Events.Instance.GreenZoneClickEvent += () => slider.value = 0;
+        Events.Instance.BlueZoneClickEvent += () => slider.value = 0;
+        Events.Instance.WinEvent.AddListener(() => slider.value = 0);
     }
 
     private void OnDisable()
     {
-        Events.Instance.ZoneClickEvent -= () => slider.value = 0;
+        Events.Instance.GreenZoneClickEvent -= () => slider.value = 0;
+        Events.Instance.BlueZoneClickEvent -= () => slider.value = 0;
+        Events.Instance.WinEvent.RemoveListener(() => slider.value = 0);
+        slider.value = 0;
     }
 
     private void Update()

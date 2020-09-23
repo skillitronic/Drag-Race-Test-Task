@@ -1,29 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FinishLine : MonoBehaviour
 {
-    private bool hasCrossed;
+    [SerializeField]protected bool hasCrossed = false;
+
+    private void Awake()
+    {
+        hasCrossed = false;
+        Debug.Log("OnAwakeCheck");
+    }
 
     private void OnEnable()
     {
-        GameController.Instance.finishLineReference = transform;
+        //hasCrossed = false;
     }
 
-    private void OnDisable()
+    private void Start()
+    {
+        GameController.Instance.finishLineReference = transform;
+        //hasCrossed = false;
+    }
+
+    private void OnDestroy()
     {
         hasCrossed = false;
+        Debug.Log("OnDestroyCheck");
     }
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Check");
         if (hasCrossed == false)
         {
+            Debug.Log("Re");
             if (other.gameObject.GetComponent<PlayerCar>())
             {
                 Events.Instance.WinEvent.Invoke();
             }
-            else
+            else if (other.gameObject.GetComponent<EnemyCar>())
             {
                 Events.Instance.LoseEvent.Invoke();
             }

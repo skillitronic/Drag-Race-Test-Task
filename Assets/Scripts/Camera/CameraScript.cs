@@ -61,7 +61,6 @@ public class CameraScript : MonoBehaviour
 
         Events.Instance.UpgradeEvent += () => startTrack = false;
 
-        playerCar = null;
 
     }
 

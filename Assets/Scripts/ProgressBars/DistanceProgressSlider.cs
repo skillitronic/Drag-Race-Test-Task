@@ -4,14 +4,12 @@ using UnityEngine.UI;
 public class DistanceProgressSlider : MonoBehaviour
 {
     [SerializeField] private Slider slider;
-    private Transform playerCar;
-    private Transform finishLine;
-
-    
+    public Transform playerCar;
+    public Transform finishLine;
 
     private void OnEnable()
     {
-        playerCar = GameController.Instance.carReference;
+        playerCar = GameController.Instance.carReference.transform;
         finishLine = GameController.Instance.finishLineReference;
     }
 
@@ -19,6 +17,7 @@ public class DistanceProgressSlider : MonoBehaviour
     {
         playerCar = null;
         finishLine = null;
+        slider.value = 0;
     }
 
 

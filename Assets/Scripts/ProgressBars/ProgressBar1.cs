@@ -31,37 +31,38 @@ public class ProgressBar1 : MonoBehaviour
         possibleRandomRange = sliderHeight / 2 - zonesFolder.rect.height / 2;
         zonePosition = Random.Range(-possibleRandomRange, possibleRandomRange);
         zonesFolder.localPosition = new Vector2(0, zonePosition);
+        Events.Instance.ZoneClickEvent += RestartLoop;
+        Events.Instance.ZoneClickEvent += MoveZone;
+        Events.Instance.ZoneClickEvent += CalculateTouchZone;
+
+        Events.Instance.WinEvent.AddListener(() => slider.value = 0);
 
         CalculateTouchZone();
 
         StartLoop();
     }
 
-    private void OnEnable()
-    {
-        timeToReach -= GameController.Instance.equipedUpgrades.upgradeList.Count * 0.05f;
-    }
-
     private void Start()
     {
-        Events.Instance.ZoneClickEvent += RestartLoop;
-        Events.Instance.ZoneClickEvent += MoveZone;
-        Events.Instance.ZoneClickEvent += CalculateTouchZone;
+    }
 
+    private void OnEnable()
+    {
         Events.Instance.GreenZoneClickEvent += Events.Instance.ZoneClickEvent.Invoke;
         Events.Instance.BlueZoneClickEvent += Events.Instance.ZoneClickEvent.Invoke;
 
+        timeToReach -= GameController.Instance.equipedUpgrades.upgradeList.Count * 0.05f;
     }
 
     private void OnDisable()
     {
-        Events.Instance.ZoneClickEvent -= RestartLoop;
+/*        Events.Instance.ZoneClickEvent -= RestartLoop;
         Events.Instance.ZoneClickEvent -= MoveZone;
-        Events.Instance.ZoneClickEvent -= CalculateTouchZone;
+        Events.Instance.ZoneClickEvent -= CalculateTouchZone;*/
 
         Events.Instance.GreenZoneClickEvent -= Events.Instance.ZoneClickEvent.Invoke;
         Events.Instance.BlueZoneClickEvent -= Events.Instance.ZoneClickEvent.Invoke;
-
+        slider.value = 0;
         timeToReach = 2;
     }
 

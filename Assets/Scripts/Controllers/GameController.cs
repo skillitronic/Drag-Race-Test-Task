@@ -14,8 +14,8 @@ public class GameController : MonoBehaviour
 
     public int score;
 
-    [HideInInspector] public Transform carReference;
-    [HideInInspector] public Transform finishLineReference;
+    public GameObject carReference;
+    public Transform finishLineReference;
 
 
     private void Awake()
@@ -68,7 +68,7 @@ public class GameController : MonoBehaviour
         {
             levelList[SaveData.Current.levelIndex].isChosen = false;
             levelList[SaveData.Current.levelIndex].isWon = false;
-            Instantiate(levelList[SaveData.Current.levelIndex].levelReference, instantiater);
+            Instantiate(levelList[SaveData.Current.levelIndex].levelReference, instantiater,true);
             Events.Instance.StartTimerEvent.Invoke();
         }
     }

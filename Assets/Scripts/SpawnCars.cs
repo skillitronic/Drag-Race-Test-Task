@@ -3,9 +3,21 @@
 public class SpawnCars : MonoBehaviour
 {
     [SerializeField] private GameObject carReference = null;
-    public void Awake()
+    private GameObject carBumper;
+    public void OnEnable()
     {
-        GameObject car = Instantiate(carReference, GameController.Instance.instantiater.transform);
-        car.transform.position = transform.position;
+        carBumper = Instantiate(carReference, GameController.Instance.instantiater.transform);
+        carBumper.transform.position = transform.position;
+        if (carBumper.GetComponent<PlayerCar>())
+        {
+            GameController.Instance.carReference = carBumper;
+            CameraScript.Instance.playerCar = carBumper.transform;
+
+        }
+    }
+
+    public void OnDisable()
+    {
+        carBumper = null;
     }
 }

@@ -989,6 +989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 131.6
+  rb: {fileID: 5803393593000007298}
   flameParticles: {fileID: 6202150563288036745}
 --- !u!54 &5803393593000007298
 Rigidbody:

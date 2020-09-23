@@ -1,23 +1,22 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 public abstract class Car : MonoBehaviour
 {
     [SerializeField] protected float speed = 1;
     protected bool startMove;
     protected float localSpeed;
-    protected Rigidbody rb;
-    private void OnEnable()
-    {
-        rb = GetComponent<Rigidbody>();
-        localSpeed = speed;
+    [SerializeField] protected Rigidbody rb;
 
+
+    private void Start()
+    {
         Events.Instance.StartGameEvent.AddListener(() => startMove = true);
         Events.Instance.WinEvent.AddListener(() => startMove = false);
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
-        Events.Instance.StartGameEvent.RemoveListener(() => startMove = true);
-        Events.Instance.WinEvent.RemoveListener(() => startMove = false);
+*//*        Events.Instance.StartGameEvent.RemoveListener(() => startMove = true);
+        Events.Instance.WinEvent.RemoveListener(() => startMove = false);*//*
     }
 
     private void FixedUpdate()
@@ -39,3 +38,4 @@ public abstract class Car : MonoBehaviour
         }
     }
 }
+*/

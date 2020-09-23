@@ -32,6 +32,7 @@ public class UIController : MonoBehaviour
     {
         Events.Instance.WinEvent.RemoveListener(WinText);
         Events.Instance.LoseEvent.RemoveListener(LoseText);
+        StopAllCoroutines();
     }
 
     public void FadeInCanvas(GameObject gameObject)
