@@ -17,31 +17,24 @@ public class GameController : MonoBehaviour
     public GameObject carReference;
     public Transform finishLineReference;
 
+    public CarContainer carContainer;
 
     private void Awake()
     {
-        Instance = this;
-        SaveSystem.Load("levels", ref SaveData.Current.levelIndex);
-    }
 
-    private void OnEnable()
-    {
+        Instance = this;
+
         Events.Instance.GreenZoneClickEvent += () => IncreaseScore(500);
         Events.Instance.BlueZoneClickEvent += () => IncreaseScore(1500);
-
         Events.Instance.WinEvent.AddListener(() => levelList[SaveData.Current.levelIndex].isWon = true);
         Events.Instance.UpgradeEvent += CheckForUpgrades;
     }
 
-    private void OnDisable()
+    private void OnEnable()
     {
-        Events.Instance.GreenZoneClickEvent -= () => IncreaseScore(500);
-        Events.Instance.BlueZoneClickEvent -= () => IncreaseScore(1500);
-
-        Events.Instance.WinEvent.RemoveListener(() => levelList[SaveData.Current.levelIndex].isWon = true);
-        Events.Instance.UpgradeEvent -= CheckForUpgrades;
-
+        SaveSystem.Load("levels", ref SaveData.Current.levelIndex);
     }
+
 
     private void Start()
     {
@@ -55,6 +48,7 @@ public class GameController : MonoBehaviour
 
     public void SpawnLevel()
     {
+
         if (levelList[SaveData.Current.levelIndex].isWon == false)
         {
             Instantiate(levelList[SaveData.Current.levelIndex].levelReference, instantiater);
@@ -62,14 +56,17 @@ public class GameController : MonoBehaviour
         }
         else if (levelList[SaveData.Current.levelIndex].isWon == true && levelList[SaveData.Current.levelIndex].isChosen == false)
         {
-            SceneController.AddSceneByName("UpgradeScene");
-        }
-        else if (levelList[SaveData.Current.levelIndex].isWon == true && levelList[SaveData.Current.levelIndex].isChosen == true)
-        {
-            levelList[SaveData.Current.levelIndex].isChosen = false;
-            levelList[SaveData.Current.levelIndex].isWon = false;
-            Instantiate(levelList[SaveData.Current.levelIndex].levelReference, instantiater,true);
-            Events.Instance.StartTimerEvent.Invoke();
+            if (!levelList[SaveData.Current.levelIndex].upgrades.Any())
+            {
+                levelList[SaveData.Current.levelIndex].isChosen = true;
+                SaveData.Current.levelIndex += 1;
+                SaveSystem.Save("levels", SaveData.Current.levelIndex);
+                SpawnLevel();
+            }
+            else
+            {
+                SceneController.AddSceneByName("UpgradeScene");
+            }
         }
     }
 
@@ -97,6 +94,15 @@ public class GameController : MonoBehaviour
         {
             DestroyLevel();
             SceneController.AddSceneByName("UpgradeScene");
+        }
+    }
+
+    public void CarCheck()
+    {
+        if (equipedUpgrades.upgradeList.Count == 9)
+        {
+            equipedUpgrades.upgradeList.Clear();
+            carContainer.carIndex++;
         }
     }
 }

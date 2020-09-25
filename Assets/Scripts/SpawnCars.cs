@@ -6,14 +6,22 @@ public class SpawnCars : MonoBehaviour
     private GameObject carBumper;
     public void OnEnable()
     {
-        carBumper = Instantiate(carReference, GameController.Instance.instantiater.transform);
-        carBumper.transform.position = transform.position;
-        if (carBumper.GetComponent<PlayerCar>())
+        if (carReference == null)
         {
-            GameController.Instance.carReference = carBumper;
-            CameraScript.Instance.playerCar = carBumper.transform;
-
+            if (GameController.Instance.carContainer.cars[GameController.Instance.carContainer.carIndex].GetComponent<PlayerCar>())
+            {
+                carBumper = Instantiate(GameController.Instance.carContainer.cars[GameController.Instance.carContainer.carIndex], GameController.Instance.instantiater.transform);
+                GameController.Instance.carReference = carBumper;
+                CameraScript.Instance.playerCar = carBumper.transform;
+            }
         }
+        else
+        {
+            carBumper = Instantiate(carReference, GameController.Instance.instantiater.transform);
+        }
+
+        carBumper.transform.position = transform.position;
+
     }
 
     public void OnDisable()

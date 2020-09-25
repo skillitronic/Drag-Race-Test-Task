@@ -33,11 +33,6 @@ public class CameraScript : MonoBehaviour
         cameraStartPosition = transform.position;
         gameCamera.fieldOfView = cameraFOV;
 
-    }
-
-    private void Start()
-    {
-
         Events.Instance.StartGameEvent.AddListener(() => startTrack = true);
 
         Events.Instance.GreenZoneClickEvent += () => gameCamera.DOFieldOfView(cameraFOV + cameraFOVIncreaser, FOVTimeAnimation).SetEase(easeType).OnComplete(() => gameCamera.DOFieldOfView(cameraFOV, FOVTimeAnimation).SetEase(easeType).SetDelay(FOVTimeDelay)).SetAutoKill(false); ;
@@ -46,6 +41,11 @@ public class CameraScript : MonoBehaviour
         Events.Instance.BlueZoneClickEvent += () => speedParticles.SetActive(true);
 
         Events.Instance.UpgradeEvent += () => startTrack = false;
+    }
+
+    private void Start()
+    {
+
 
     }
 

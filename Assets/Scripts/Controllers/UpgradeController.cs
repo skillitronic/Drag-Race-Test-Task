@@ -34,6 +34,7 @@ public class UpgradeController : MonoBehaviour
             GameController.Instance.levelList[SaveData.Current.levelIndex].isChosen = true;
             SaveData.Current.levelIndex += 1;
             SaveSystem.Save("levels", SaveData.Current.levelIndex);
+            GameController.Instance.CarCheck();
             GameController.Instance.SpawnLevel();
             SceneController.UnloadSceneByName("UpgradeScene");
         }

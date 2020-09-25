@@ -42,10 +42,6 @@ public class ProgressBar1 : MonoBehaviour
         StartLoop();
     }
 
-    private void Start()
-    {
-    }
-
     private void OnEnable()
     {
         Events.Instance.GreenZoneClickEvent += Events.Instance.ZoneClickEvent.Invoke;
@@ -63,7 +59,7 @@ public class ProgressBar1 : MonoBehaviour
         Events.Instance.GreenZoneClickEvent -= Events.Instance.ZoneClickEvent.Invoke;
         Events.Instance.BlueZoneClickEvent -= Events.Instance.ZoneClickEvent.Invoke;
         slider.value = 0;
-        timeToReach = 2;
+        timeToReach = 1;
     }
 
 

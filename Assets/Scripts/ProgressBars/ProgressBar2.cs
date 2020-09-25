@@ -13,7 +13,7 @@ public class ProgressBar2 : MonoBehaviour
 
     public float timer;
 
-    private void OnEnable()
+    private void Awake()
     {
         Events.Instance.GreenZoneClickEvent += () => slider.value = 0;
         Events.Instance.BlueZoneClickEvent += () => slider.value = 0;
@@ -22,9 +22,9 @@ public class ProgressBar2 : MonoBehaviour
 
     private void OnDisable()
     {
-        Events.Instance.GreenZoneClickEvent -= () => slider.value = 0;
+/*        Events.Instance.GreenZoneClickEvent -= () => slider.value = 0;
         Events.Instance.BlueZoneClickEvent -= () => slider.value = 0;
-        Events.Instance.WinEvent.RemoveListener(() => slider.value = 0);
+        Events.Instance.WinEvent.RemoveListener(() => slider.value = 0);*/
         slider.value = 0;
     }
 
@@ -39,7 +39,7 @@ public class ProgressBar2 : MonoBehaviour
 
         if (slider.value < slider.maxValue)
         {
-            slider.value += Time.deltaTime / 10; // 10 seconds before starts lose timer
+            slider.value += Time.deltaTime / 5; // 5 seconds before starts lose timer
         }
         else if (slider.value == slider.maxValue)
         {

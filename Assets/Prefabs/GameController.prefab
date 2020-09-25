@@ -2222,7 +2222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1232044350
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2393,7 +2393,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1288710982
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2401,7 +2401,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288710978}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2698,7 +2698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 106d96797ddc73e48aa3830f92668a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToReach: 2
+  timeToReach: 1
   zonesFolder: {fileID: 339494990}
   greenZone: {fileID: 198468428}
   blueZone: {fileID: 582696840}
@@ -2831,7 +2831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1771658400
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3577,9 +3577,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f388d2a63339d2948b6d127a71730142, type: 2}
   equipedUpgrades: {fileID: 11400000, guid: 279fc204671754147acc8d88f3081a48, type: 2}
   instantiater: {fileID: 0}
-  score: 1000
+  score: 0
   carReference: {fileID: 0}
   finishLineReference: {fileID: 0}
+  carContainer: {fileID: 11400000, guid: 4b120bbdcb6be394cb8c941316912d23, type: 2}
 --- !u!114 &625818178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3712,3 +3713,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b822dec2dc47b145941d355bbe85458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIController: {fileID: 625818178}

@@ -7,10 +7,10 @@ public class PlayerCar : MonoBehaviour
     public bool isCoroRunning;
     [SerializeField] private float speed = 1;
     private bool startMove;
-    private float localSpeed;
+    public float localSpeed;
     [SerializeField] private Rigidbody rb;
 
-    private void Start()
+    private void Awake()
     {
         Events.Instance.ZoneClickEvent += IncreaseSpeed;
         Events.Instance.BlueZoneClickEvent += () => flameParticles.SetActive(true);
@@ -22,8 +22,7 @@ public class PlayerCar : MonoBehaviour
         localSpeed = speed;
         Events.Instance.StartGameEvent.AddListener(() => startMove = true);
         Events.Instance.WinEvent.AddListener(() => startMove = false);
-
-        Events.Instance.LoseEvent.AddListener(() => speed = 0);
+        Events.Instance.LoseEvent.AddListener(() => startMove = false);
 
     }
 
@@ -35,7 +34,7 @@ public class PlayerCar : MonoBehaviour
         Events.Instance.StartGameEvent.RemoveListener(() => startMove = true);
         Events.Instance.WinEvent.RemoveListener(() => startMove = false);
         Events.Instance.BlueZoneClickEvent -= () => flameParticles.SetActive(true);
-        Events.Instance.LoseEvent.RemoveListener(() => speed = 0);
+        Events.Instance.LoseEvent.RemoveListener(() => startMove = false);
         isCoroRunning = false;
     }
 
@@ -44,22 +43,14 @@ public class PlayerCar : MonoBehaviour
         StopAllCoroutines();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            IncreaseSpeed();
-        }
-    }
-
     public void IncreaseSpeed()
     {
-        isCoroRunning = true;
-        if (isCoroRunning)
+        if (!isCoroRunning)
         {
-            StartCoroutine(IncreaseSpeedNumerator());
+            StartCoroutine("IncreaseSpeedNumerator");
             Debug.Log("Done");
         }
+        isCoroRunning = true;
     }
 
     private void FixedUpdate()
@@ -84,18 +75,11 @@ public class PlayerCar : MonoBehaviour
 
     public IEnumerator IncreaseSpeedNumerator()
     {
-        localSpeed = speed;
-        float newSpeed = localSpeed * 1.6f;
+        float newSpeed = localSpeed * 1.5f;
         while (localSpeed < newSpeed)
         {
             localSpeed += 20f;
             yield return new WaitForSeconds(.2f);
-        }
-
-        while (localSpeed > speed)
-        {
-            localSpeed -= 10f;
-            yield return new WaitForSeconds(.08f);
         }
         isCoroRunning = false;
     }

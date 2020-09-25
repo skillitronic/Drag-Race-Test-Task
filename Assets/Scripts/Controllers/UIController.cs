@@ -19,21 +19,16 @@ public class UIController : MonoBehaviour
 
     private void Awake()
     {
+        
+    }
+
+    private void Start()
+    {
         Instance = this;
-    }
-
-    private void OnEnable()
-    {
         Events.Instance.WinEvent.AddListener(WinText);
-        Events.Instance.LoseEvent.AddListener(LoseText);
+        Events.Instance.LoseEvent.AddListener(LoseText);        
     }
 
-    private void OnDisable()
-    {
-        Events.Instance.WinEvent.RemoveListener(WinText);
-        Events.Instance.LoseEvent.RemoveListener(LoseText);
-        StopAllCoroutines();
-    }
 
     public void FadeInCanvas(GameObject gameObject)
     {
@@ -51,16 +46,17 @@ public class UIController : MonoBehaviour
 
     public void WinText()
     {
-        winnerTextAnimation.gameObject.SetActive(true);
-
+        //winnerTextAnimation.gameObject.SetActive(true);
+        winnerText.alpha = 1f;
+        scoreText.alpha = 0f;
         winnerTextAnimation.Play
             (
             text: "WINNER",
             speed: 5f,
             onComplete: () =>
                 {
-                    winnerText.DOFade(0, .5f).SetDelay(.5f).OnComplete(() => winnerText.gameObject.SetActive(false));
-                    StartCoroutine(nameof(ScoreAnimation));
+                    winnerText.DOFade(0, .5f).SetDelay(.5f).OnComplete(() => /*winnerText.gameObject.SetActive(false)*/
+                    StartCoroutine("ScoreAnimation"));
                 }
             );
     }
@@ -73,18 +69,16 @@ public class UIController : MonoBehaviour
     private IEnumerator ScoreAnimation()
     {
         yield return new WaitForSeconds(1f);
-        scoreText.gameObject.SetActive(true);
+        scoreText.alpha = 1f;
         float number = 0;
         while (number < GameController.Instance.score)
         {
-
             number += 25;
             scoreText.SetText(number.ToString());
             yield return new WaitForSeconds(.02f);
         }
         scoreText.DOFade(0, 1f).OnComplete(() =>
         {
-            scoreText.gameObject.SetActive(false);
             Events.Instance.UpgradeEvent?.Invoke();
 
         }).SetDelay(1f);

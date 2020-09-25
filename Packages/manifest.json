@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "com.unity.analytics": "3.3.5",
-    "com.unity.device-simulator": "2.2.3-preview",
     "com.unity.ide.vscode": "1.2.1",
     "com.unity.progrids": "3.0.3-preview.6",
     "com.unity.recorder": "2.2.0-preview.4",
